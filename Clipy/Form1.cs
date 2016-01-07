@@ -17,7 +17,7 @@ namespace Clipy
         protected static extern int SetClipboardViewer(int hWndNewViewer);
         [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern bool ChangeClipboardChain(IntPtr hWndRemove, IntPtr hWndNewNext);
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern int SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
 
         IntPtr nextClipboardViewer;
@@ -31,7 +31,7 @@ namespace Clipy
         protected override void WndProc(ref System.Windows.Forms.Message m)
         {
             // defined in winuser.h
-            const int WM_DRAWCLIPBOARD = 0x308;
+            const int WM_DRAWCLIPBOARD = 0x0308;
             const int WM_CHANGECBCHAIN = 0x030D;
 
             switch (m.Msg)
