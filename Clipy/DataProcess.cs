@@ -15,6 +15,17 @@ namespace Clipy
 
         public DataProcess()
         {
+            using (conn = new SQLiteConnection("Data Source=" + DBPATH))
+            {
+                conn.Open();
+                using (SQLiteCommand command = new SQLiteCommand(conn))
+                {
+                    command.CommandText = "CREATE TABLE Demo(id integer NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE)";
+                    command.ExecuteNonQuery();
+                    command.CommandText = "DROP TABLE Demo";
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

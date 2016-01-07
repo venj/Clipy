@@ -26,6 +26,7 @@ namespace Clipy
         {
             InitializeComponent();
             nextClipboardViewer = (IntPtr)SetClipboardViewer((int)this.Handle);
+            DataProcess db = new DataProcess();
         }
 
         protected override void WndProc(ref System.Windows.Forms.Message m)
