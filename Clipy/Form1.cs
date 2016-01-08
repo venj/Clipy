@@ -21,12 +21,15 @@ namespace Clipy
         public static extern int SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
 
         IntPtr nextClipboardViewer;
+        List<Group> groups;
 
         public Form1()
         {
             InitializeComponent();
             nextClipboardViewer = (IntPtr)SetClipboardViewer((int)this.Handle);
+            // Initialize database.
             DataProcess db = new DataProcess();
+            ReloadGroupsUI();
         }
 
         protected override void WndProc(ref System.Windows.Forms.Message m)
@@ -63,13 +66,101 @@ namespace Clipy
             {
                 if (iData.GetDataPresent(DataFormats.Text))
                 {
-                    Console.WriteLine( (string)iData.GetData(DataFormats.Text) );
+                    var content = (string)iData.GetData(DataFormats.Text);
+                    var history = new History();
+                    history.Content = content;
+                    history.CreatedAt = DateTime.Now;
+                    var db = new DataProcess();
+                    db.SaveHistory(history);
                 }
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
                 //throw;
+            }
+        }
+
+        private void groupList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectionCount = groupsList.SelectedIndices.Count;
+            if (selectionCount == 1)
+            {
+                deleteGroupButton.Enabled = true;
+                renameGroupButton.Enabled = true;
+            }
+            else if (selectionCount > 1)
+            {
+                deleteGroupButton.Enabled = true;
+                renameGroupButton.Enabled = false;
+            }
+            else
+            {
+                deleteGroupButton.Enabled = false;
+                renameGroupButton.Enabled = false;
+            }
+            var db = new DataProcess();
+            int selectedIndex = ((ListBox)sender).SelectedIndex;
+            if (selectedIndex >= groups.Count || selectedIndex < 0) { return; }
+            var group = groups[selectedIndex];
+            // TODO: Do more, like show snippets in the groups.
+            Console.WriteLine(string.Format("id: {0}, name: {1}", group.Id, group.Name));
+        }
+
+        private void addGroupButton_Click(object sender, EventArgs e)
+        {
+            var name = groupNameTextBox.Text.Trim();
+            if (name.Length == 0)
+            {
+                MessageBox.Show("Group name can not be empty!");
+            }
+            else
+            {
+                var db = new DataProcess();
+                try
+                {
+                    db.AddGroup(name);
+                    ReloadGroupsUI();
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.ToString());
+                }
+            }
+        }
+
+        private void ReloadGroupsUI()
+        {
+            DataProcess db = new DataProcess();
+            groupNameTextBox.Text = ""; // clear textbox.
+            groupsList.Items.Clear();
+            groups = db.LoadGroups();
+            groups.ForEach(delegate(Group v) {
+                groupsList.Items.Add(v.Name);
+            });
+        }
+
+        private void deleteGroupButton_Click(object sender, EventArgs e)
+        {
+            var indices = groupsList.SelectedIndices;
+            var db = new DataProcess();
+            foreach (int i in indices)
+            {
+                db.DeleteGroup(groups[i]);
+            }
+            ReloadGroupsUI();
+        }
+
+        private void renameGroupButton_Click(object sender, EventArgs e)
+        {
+            var index = groupsList.SelectedIndex;
+            var group = groups[index];
+            string input = Microsoft.VisualBasic.Interaction.InputBox("Rename group", "Rename", group.Name).Trim();
+            if (input != "")
+            {
+                var db = new DataProcess();
+                db.RenameGroup(group, input);
+                ReloadGroupsUI();
             }
         }
     }

@@ -29,12 +29,101 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.groupsBox = new System.Windows.Forms.GroupBox();
+            this.deleteGroupButton = new System.Windows.Forms.Button();
+            this.groupNameTextBox = new System.Windows.Forms.TextBox();
+            this.addGroupButton = new System.Windows.Forms.Button();
+            this.groupsList = new System.Windows.Forms.ListBox();
+            this.renameGroupButton = new System.Windows.Forms.Button();
+            this.groupsBox.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // groupsBox
+            // 
+            this.groupsBox.Controls.Add(this.renameGroupButton);
+            this.groupsBox.Controls.Add(this.deleteGroupButton);
+            this.groupsBox.Controls.Add(this.groupNameTextBox);
+            this.groupsBox.Controls.Add(this.addGroupButton);
+            this.groupsBox.Controls.Add(this.groupsList);
+            this.groupsBox.Location = new System.Drawing.Point(12, 66);
+            this.groupsBox.Name = "groupsBox";
+            this.groupsBox.Size = new System.Drawing.Size(150, 294);
+            this.groupsBox.TabIndex = 4;
+            this.groupsBox.TabStop = false;
+            this.groupsBox.Text = "Groups";
+            // 
+            // deleteGroupButton
+            // 
+            this.deleteGroupButton.Enabled = false;
+            this.deleteGroupButton.Location = new System.Drawing.Point(76, 261);
+            this.deleteGroupButton.Name = "deleteGroupButton";
+            this.deleteGroupButton.Size = new System.Drawing.Size(66, 23);
+            this.deleteGroupButton.TabIndex = 7;
+            this.deleteGroupButton.Text = "Delete";
+            this.deleteGroupButton.UseVisualStyleBackColor = true;
+            this.deleteGroupButton.Click += new System.EventHandler(this.deleteGroupButton_Click);
+            // 
+            // groupNameTextBox
+            // 
+            this.groupNameTextBox.Location = new System.Drawing.Point(6, 18);
+            this.groupNameTextBox.Name = "groupNameTextBox";
+            this.groupNameTextBox.Size = new System.Drawing.Size(106, 21);
+            this.groupNameTextBox.TabIndex = 6;
+            // 
+            // addGroupButton
+            // 
+            this.addGroupButton.Location = new System.Drawing.Point(118, 17);
+            this.addGroupButton.Name = "addGroupButton";
+            this.addGroupButton.Size = new System.Drawing.Size(24, 24);
+            this.addGroupButton.TabIndex = 5;
+            this.addGroupButton.Text = "+";
+            this.addGroupButton.UseVisualStyleBackColor = true;
+            this.addGroupButton.Click += new System.EventHandler(this.addGroupButton_Click);
+            // 
+            // groupsList
+            // 
+            this.groupsList.FormattingEnabled = true;
+            this.groupsList.ItemHeight = 12;
+            this.groupsList.Location = new System.Drawing.Point(6, 47);
+            this.groupsList.Name = "groupsList";
+            this.groupsList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.groupsList.Size = new System.Drawing.Size(136, 208);
+            this.groupsList.TabIndex = 4;
+            this.groupsList.SelectedIndexChanged += new System.EventHandler(this.groupList_SelectedIndexChanged);
+            // 
+            // renameGroupButton
+            // 
+            this.renameGroupButton.Enabled = false;
+            this.renameGroupButton.Location = new System.Drawing.Point(6, 261);
+            this.renameGroupButton.Name = "renameGroupButton";
+            this.renameGroupButton.Size = new System.Drawing.Size(64, 23);
+            this.renameGroupButton.TabIndex = 8;
+            this.renameGroupButton.Text = "Rename";
+            this.renameGroupButton.UseVisualStyleBackColor = true;
+            this.renameGroupButton.Click += new System.EventHandler(this.renameGroupButton_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(529, 372);
+            this.Controls.Add(this.groupsBox);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.groupsBox.ResumeLayout(false);
+            this.groupsBox.PerformLayout();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.GroupBox groupsBox;
+        private System.Windows.Forms.Button renameGroupButton;
+        private System.Windows.Forms.Button deleteGroupButton;
+        private System.Windows.Forms.TextBox groupNameTextBox;
+        private System.Windows.Forms.Button addGroupButton;
+        private System.Windows.Forms.ListBox groupsList;
     }
 }
 
