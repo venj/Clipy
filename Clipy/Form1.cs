@@ -22,6 +22,7 @@ namespace Clipy
 
         IntPtr nextClipboardViewer;
         List<Group> groups;
+        List<History> histories;
 
         public Form1()
         {
@@ -30,6 +31,7 @@ namespace Clipy
             // Initialize database.
             DataProcess db = new DataProcess();
             ReloadGroupsUI();
+            ReloadHistoriesUI();
         }
 
         protected override void WndProc(ref System.Windows.Forms.Message m)
@@ -72,6 +74,8 @@ namespace Clipy
                     history.CreatedAt = DateTime.Now;
                     var db = new DataProcess();
                     db.SaveHistory(history);
+                    histories = db.LoadHistories();
+                    ReloadHistoriesUI();
                 }
             }
             catch (Exception e)
@@ -99,7 +103,6 @@ namespace Clipy
                 deleteGroupButton.Enabled = false;
                 renameGroupButton.Enabled = false;
             }
-            var db = new DataProcess();
             int selectedIndex = ((ListBox)sender).SelectedIndex;
             if (selectedIndex >= groups.Count || selectedIndex < 0) { return; }
             var group = groups[selectedIndex];
@@ -162,6 +165,27 @@ namespace Clipy
                 db.RenameGroup(group, input);
                 ReloadGroupsUI();
             }
+        }
+
+        private void ReloadHistoriesUI()
+        {
+            DataProcess db = new DataProcess();
+            histories = db.LoadHistories();
+            historiesList.Items.Clear();
+            histories.ForEach(delegate (History h) {
+                var c = h.Content.Trim();
+                if (c.Count() > 50)
+                {
+                    c = c.Substring(0, 50);
+                }
+                historiesList.Items.Add(c);
+            });
+        }
+
+        private void historiesList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var index = historiesList.SelectedIndex;
+            contentTextBox.Text = histories[index].Content;
         }
     }
 }

@@ -180,5 +180,31 @@ namespace Clipy
             return history;
         }
 
+        public List<History> LoadHistories()
+        {
+            List<History> list = new List<History>();
+            using (var conn = new SQLiteConnection(DataSource))
+            {
+                conn.Open();
+                using (SQLiteCommand command = new SQLiteCommand(conn))
+                {
+
+                    var sql = "SELECT * FROM histories ORDER BY `id` DESC";
+                    command.CommandText = sql;
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        var history = new History();
+                        history.Id = reader.GetInt32(0);
+                        history.Name = "" + reader.GetValue(1);
+                        history.Content = "" + reader.GetValue(2);
+                        // obj 3, group_id 4
+                        history.CreatedAt = reader.GetDateTime(5);
+                        list.Add(history);
+                    }
+                }
+            }
+            return list;
+        }
     }
 }
