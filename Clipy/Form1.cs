@@ -43,7 +43,7 @@ namespace Clipy
             switch (m.Msg)
             {
                 case WM_DRAWCLIPBOARD:
-                    DisplayClipboardData();
+                    ClipboardDataChanged();
                     SendMessage(nextClipboardViewer, m.Msg, m.WParam, m.LParam);
                     break;
 
@@ -60,7 +60,7 @@ namespace Clipy
             }
         }
 
-        void DisplayClipboardData()
+        void ClipboardDataChanged()
         {
             IDataObject iData = Clipboard.GetDataObject();
 
@@ -69,6 +69,7 @@ namespace Clipy
                 if (iData.GetDataPresent(DataFormats.Text))
                 {
                     var content = (string)iData.GetData(DataFormats.Text);
+                    if (content == null || content == "") { return; }
                     var history = new History();
                     history.Content = content;
                     history.CreatedAt = DateTime.Now;
