@@ -136,12 +136,14 @@
             this.historiesList.Size = new System.Drawing.Size(337, 100);
             this.historiesList.TabIndex = 7;
             this.historiesList.SelectedIndexChanged += new System.EventHandler(this.historiesList_SelectedIndexChanged);
+            this.historiesList.DoubleClick += new System.EventHandler(this.historiesList_DoubleClick);
             // 
             // contentTextBox
             // 
             this.contentTextBox.Location = new System.Drawing.Point(3, 6);
             this.contentTextBox.Multiline = true;
             this.contentTextBox.Name = "contentTextBox";
+            this.contentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.contentTextBox.Size = new System.Drawing.Size(337, 217);
             this.contentTextBox.TabIndex = 9;
             // 

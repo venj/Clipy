@@ -187,5 +187,15 @@ namespace Clipy
             var index = historiesList.SelectedIndex;
             contentTextBox.Text = histories[index].Content;
         }
+
+        private void historiesList_DoubleClick(object sender, EventArgs e)
+        {
+            var index = historiesList.SelectedIndex;
+            var content = histories[index].Content;
+            if (content == null) { return;  }
+            contentTextBox.Text = content;
+            if (content.Trim() == "") { return; }
+            Clipboard.SetText(content);
+        }
     }
 }
