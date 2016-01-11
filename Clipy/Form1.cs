@@ -19,6 +19,9 @@ namespace Clipy
         public static extern bool ChangeClipboardChain(IntPtr hWndRemove, IntPtr hWndNewNext);
         [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern int SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
+        // Bring window to front while not in focus.
+        [DllImport("User32.dll")]
+        public static extern Int32 SetForegroundWindow(int hWnd);
 
         IntPtr nextClipboardViewer;
         List<Group> groups;
@@ -216,8 +219,18 @@ namespace Clipy
             }
             else {
                 Show();
+                SetForegroundWindow(Handle.ToInt32());
                 WindowState = FormWindowState.Normal;
             }
+        }
+
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right)
+            {
+                return;
+            }
+            MessageBox.Show("Right click.");
         }
     }
 }
