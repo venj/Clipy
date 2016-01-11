@@ -198,5 +198,26 @@ namespace Clipy
             if (content.Trim() == "") { return; }
             Clipboard.SetText(content);
         }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            if (FormWindowState.Minimized == WindowState)
+            {
+                Hide();
+            }
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (FormWindowState.Normal == WindowState)
+            {
+                Hide();
+                WindowState = FormWindowState.Minimized;
+            }
+            else {
+                Show();
+                WindowState = FormWindowState.Normal;
+            }
+        }
     }
 }

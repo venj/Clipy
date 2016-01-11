@@ -29,6 +29,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupsBox = new System.Windows.Forms.GroupBox();
             this.renameGroupButton = new System.Windows.Forms.Button();
             this.deleteGroupButton = new System.Windows.Forms.Button();
@@ -38,6 +40,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.historiesList = new System.Windows.Forms.ListBox();
             this.contentTextBox = new System.Windows.Forms.TextBox();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.groupsBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -147,6 +150,13 @@
             this.contentTextBox.Size = new System.Drawing.Size(337, 217);
             this.contentTextBox.TabIndex = 9;
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "Clipy";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -156,6 +166,7 @@
             this.Controls.Add(this.groupsBox);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.groupsBox.ResumeLayout(false);
             this.groupsBox.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -178,6 +189,7 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ListBox historiesList;
         private System.Windows.Forms.TextBox contentTextBox;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 
