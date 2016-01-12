@@ -86,7 +86,6 @@ namespace Clipy
                 using (SQLiteCommand command = new SQLiteCommand(conn))
                 {
                     command.CommandText = string.Format("UPDATE Groups SET name=@name WHERE id={0}", group.Id);
-                    Console.WriteLine(command.CommandText);
                     SQLiteParameter parameter = new SQLiteParameter();
                     parameter.ParameterName = "@name";
                     parameter.DbType = DbType.String;
@@ -188,7 +187,6 @@ namespace Clipy
                 conn.Open();
                 using (SQLiteCommand command = new SQLiteCommand(conn))
                 {
-
                     var sql = "SELECT * FROM histories ORDER BY `id` DESC";
                     command.CommandText = sql;
                     var reader = command.ExecuteReader();
@@ -206,5 +204,77 @@ namespace Clipy
             }
             return list;
         }
+
+        public List<History> LoadSnippetsInGroup(Group group)
+        {
+            List<History> list = new List<History>();
+            using (var conn = new SQLiteConnection(DataSource))
+            {
+                conn.Open();
+                using (SQLiteCommand command = new SQLiteCommand(conn))
+                {
+                    var sql = "SELECT * FROM histories WHERE group_id='@group_id' ORDER BY `id` DESC";
+                    command.CommandText = sql;
+                    SQLiteParameter parameter = new SQLiteParameter();
+                    parameter.ParameterName = "@group_id";
+                    parameter.DbType = DbType.Int32;
+                    parameter.Direction = ParameterDirection.Input;
+                    parameter.Value = group.Id;
+                    // Add the parameter to the Parameters collection. 
+                    command.Parameters.Add(parameter);
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        var history = new History();
+                        history.Id = reader.GetInt32(0);
+                        history.Name = "" + reader.GetValue(1);
+                        history.Content = "" + reader.GetValue(2);
+                        //obj 3, group_id 4
+                        history.GroupID = reader.GetInt32(4);
+                        history.CreatedAt = reader.GetDateTime(5);
+                        list.Add(history);
+                    }
+                }
+            }
+            return list;
+        }
+
+        public void SaveSnippet(History history, Group group)
+        {
+            using (var conn = new SQLiteConnection(DataSource))
+            {
+                conn.Open();
+                using (SQLiteCommand command = new SQLiteCommand(conn))
+                {
+                    command.CommandText = "INSERT INTO Histories ('content', 'group_id', 'created_at') values (@content, @group_id, @timestamp)";
+                    SQLiteParameter contentParam = new SQLiteParameter();
+                    contentParam.ParameterName = "@content";
+                    contentParam.DbType = DbType.String;
+                    contentParam.Direction = ParameterDirection.Input;
+                    contentParam.Value = history.Content;
+                    // Add the parameter to the Parameters collection. 
+                    command.Parameters.Add(contentParam);
+
+                    SQLiteParameter gidParam = new SQLiteParameter();
+                    gidParam.ParameterName = "@group_id";
+                    gidParam.DbType = DbType.Int32;
+                    gidParam.Direction = ParameterDirection.Input;
+                    gidParam.Value = group.Id;
+                    // Add the parameter to the Parameters collection. 
+                    command.Parameters.Add(gidParam);
+
+                    SQLiteParameter tsParam = new SQLiteParameter();
+                    tsParam.ParameterName = "@timestamp";
+                    tsParam.DbType = DbType.Time;
+                    tsParam.Direction = ParameterDirection.Input;
+                    tsParam.Value = history.CreatedAt;
+                    // Add the parameter to the Parameters collection. 
+                    command.Parameters.Add(tsParam);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

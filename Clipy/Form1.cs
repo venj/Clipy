@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace Clipy
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         // MFC Import
         [DllImport("User32.dll")]
@@ -18,6 +18,10 @@ namespace Clipy
         // Bring window to front while not in focus.
         [DllImport("User32.dll")]
         public static extern Int32 SetForegroundWindow(int hWnd);
+
+        // Should go to settings later.
+        private int MAX_COUNT = 50;
+        private int MAX_MENU_TITLE = 20;
 
         // Local variable
         IntPtr nextClipboardViewer;
@@ -86,7 +90,7 @@ namespace Clipy
         }
 
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             nextClipboardViewer = (IntPtr)SetClipboardViewer((int)this.Handle);
@@ -99,6 +103,11 @@ namespace Clipy
             // Hide App When start.
             Hide();
             WindowState = FormWindowState.Minimized;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -247,28 +256,35 @@ namespace Clipy
 
         private void ReloadHistoriesUI()
         {
-            DataProcess db = new DataProcess();
-            histories = db.LoadHistories();
-            historiesList.Items.Clear();
-            histories.ForEach((h) => {
-                var c = h.Content.Trim();
-                if (c.Count() > 50)
-                {
-                    c = c.Substring(0, 50);
-                }
-                historiesList.Items.Add(c);
-            });
+            if (groupsList.SelectedIndices.Count != 1)
+            {
+                snippetsList.Items.Clear();
+            }
+            else
+            {
+                DataProcess db = new DataProcess();
+                histories = db.LoadHistories();
+                snippetsList.Items.Clear();
+                histories.ForEach((h) => {
+                    var c = h.Content.Trim();
+                    if (c.Count() > 50)
+                    {
+                        c = c.Substring(0, 50);
+                    }
+                    snippetsList.Items.Add(c);
+                });
+            }
         }
 
         private void historiesList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var index = historiesList.SelectedIndex;
+            var index = snippetsList.SelectedIndex;
             contentTextBox.Text = histories[index].Content;
         }
 
         private void historiesList_DoubleClick(object sender, EventArgs e)
         {
-            var index = historiesList.SelectedIndex;
+            var index = snippetsList.SelectedIndex;
             var content = histories[index].Content;
             if (content == null) { return;  }
             contentTextBox.Text = content;
@@ -295,9 +311,6 @@ namespace Clipy
                 MakeKeyAndVisiable();
             }
         }
-
-        private int MAX_COUNT = 50;
-        private int MAX_MENU_TITLE = 20;
 
         private void UpdateTrayMenu()
         {
@@ -354,6 +367,7 @@ namespace Clipy
             SetForegroundWindow(Handle.ToInt32());
             WindowState = FormWindowState.Normal;
         }
+
     }
 }
 
