@@ -35,6 +35,8 @@ namespace Clipy
             DataProcess db = new DataProcess();
             ReloadGroupsUI();
             ReloadHistoriesUI();
+            // Initialize Tray Menu.
+            UpdateTrayMenu();
         }
 
         protected override void WndProc(ref System.Windows.Forms.Message m)
@@ -80,6 +82,7 @@ namespace Clipy
                     db.SaveHistory(history);
                     histories = db.LoadHistories();
                     ReloadHistoriesUI();
+                    UpdateTrayMenu();
                 }
             }
             catch (Exception e)
@@ -142,7 +145,7 @@ namespace Clipy
             groupNameTextBox.Text = ""; // clear textbox.
             groupsList.Items.Clear();
             groups = db.LoadGroups();
-            groups.ForEach(delegate(Group v) {
+            groups.ForEach((v) => {
                 groupsList.Items.Add(v.Name);
             });
         }
@@ -176,7 +179,7 @@ namespace Clipy
             DataProcess db = new DataProcess();
             histories = db.LoadHistories();
             historiesList.Items.Clear();
-            histories.ForEach(delegate (History h) {
+            histories.ForEach((h) => {
                 var c = h.Content.Trim();
                 if (c.Count() > 50)
                 {
@@ -224,13 +227,48 @@ namespace Clipy
             }
         }
 
-        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        private int MAX_COUNT = 50;
+        private int MAX_MENU_TITLE = 20;
+
+        private void UpdateTrayMenu()
         {
-            if (e.Button != MouseButtons.Right)
+            if (histories.Count == 0)
             {
-                return;
+                var db = new DataProcess();
+                histories = db.LoadHistories();
             }
-            MessageBox.Show("Right click.");
+
+            var contextMenu = new ContextMenu();
+            int totalItems = Math.Min(histories.Count, MAX_COUNT);
+            Console.WriteLine(totalItems);
+            MenuItem menu = new MenuItem(); // dummy 
+            for (int i = 0; i < totalItems; i++) {
+                if (i % 10 == 0)
+                {
+                    menu = new MenuItem();
+                    menu.Text = string.Format("{0} - {1}", 1 + i, (i / 10 + 1) * 10);
+                    contextMenu.MenuItems.Add(menu);
+                }
+                MenuItem subMenu = new MenuItem();
+                var content = histories[i].Content.Trim();
+                subMenu.Text = content.Substring(0, Math.Min(content.Count(), MAX_MENU_TITLE));
+                subMenu.Tag = i;
+                subMenu.Click += SubMenu_Click;
+                menu.MenuItems.Add(subMenu);
+            }
+            notifyIcon1.ContextMenu = contextMenu;
+        }
+
+        private void SubMenu_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show(String.Format("Menu clicked {0}.", ((MenuItem)sender).Tag));
+            int tag = (int)((MenuItem)sender).Tag;
+            var history = histories[tag];
+
+            var content = history.Content;
+            if (content == null || content.Trim() == "") { return; }
+            Clipboard.SetText(content);
         }
     }
 }
+

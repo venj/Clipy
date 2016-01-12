@@ -79,6 +79,7 @@
     </Compile>
     <Compile Include="Group.cs" />
     <Compile Include="History.cs" />
+    <Compile Include="ListExtension.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
