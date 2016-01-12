@@ -8,6 +8,7 @@ namespace Clipy
 {
     public partial class Form1 : Form
     {
+        // MFC Import
         [DllImport("User32.dll")]
         protected static extern int SetClipboardViewer(int hWndNewViewer);
         [DllImport("User32.dll", CharSet = CharSet.Auto)]
@@ -18,9 +19,72 @@ namespace Clipy
         [DllImport("User32.dll")]
         public static extern Int32 SetForegroundWindow(int hWnd);
 
+        // Local variable
         IntPtr nextClipboardViewer;
         List<Group> groups;
         List<History> histories;
+
+        // Calculated Property
+        private MenuItem settingsMenu;
+        private MenuItem SettingsMenu
+        {
+            get
+            {
+                if (settingsMenu == null)
+                {
+                    settingsMenu = new MenuItem();
+                    settingsMenu.Text = "Settings";
+                    settingsMenu.Click += SettingsMenu_Click;
+                }
+                return settingsMenu;
+            }
+        }
+
+        private void SettingsMenu_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Settings window here.");
+        }
+
+        private MenuItem editMenu;
+        private MenuItem EditMenu
+        {
+            get
+            {
+                if (editMenu == null)
+                {
+                    editMenu = new MenuItem();
+                    editMenu.Text = "Edit";
+                    editMenu.Click += EditMenu_Click;
+                }
+                return editMenu;
+            }
+        }
+
+        private void EditMenu_Click(object sender, EventArgs e)
+        {
+            MakeKeyAndVisiable();
+        }
+
+        private MenuItem exitMenu;
+        private MenuItem ExitMenu
+        {
+            get
+            {
+                if (exitMenu == null)
+                {
+                    exitMenu = new MenuItem();
+                    exitMenu.Text = "Exit";
+                    exitMenu.Click += ExitMenu_Click;
+                }
+                return exitMenu;
+            }
+        }
+        
+        private void ExitMenu_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
 
         public Form1()
         {
@@ -35,6 +99,15 @@ namespace Clipy
             // Hide App When start.
             Hide();
             WindowState = FormWindowState.Minimized;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                this.WindowState = FormWindowState.Minimized;
+            }
         }
 
         protected override void WndProc(ref System.Windows.Forms.Message m)
@@ -219,9 +292,7 @@ namespace Clipy
                 WindowState = FormWindowState.Minimized;
             }
             else {
-                Show();
-                SetForegroundWindow(Handle.ToInt32());
-                WindowState = FormWindowState.Normal;
+                MakeKeyAndVisiable();
             }
         }
 
@@ -238,7 +309,7 @@ namespace Clipy
 
             var contextMenu = new ContextMenu();
             int totalItems = Math.Min(histories.Count, MAX_COUNT);
-            Console.WriteLine(totalItems);
+            
             MenuItem menu = new MenuItem(); // dummy 
             for (int i = 0; i < totalItems; i++) {
                 if (i % 10 == 0)
@@ -250,10 +321,19 @@ namespace Clipy
                 MenuItem subMenu = new MenuItem();
                 var content = histories[i].Content.Trim();
                 subMenu.Text = content.Substring(0, Math.Min(content.Count(), MAX_MENU_TITLE));
+                // TODO: Tooltip? 
                 subMenu.Tag = i;
                 subMenu.Click += SubMenu_Click;
                 menu.MenuItems.Add(subMenu);
             }
+
+            // Add more menus.
+            contextMenu.MenuItems.Add("-");
+            contextMenu.MenuItems.Add(EditMenu);
+            contextMenu.MenuItems.Add(SettingsMenu);
+            contextMenu.MenuItems.Add("-");
+            contextMenu.MenuItems.Add(ExitMenu);
+
             notifyIcon1.ContextMenu = contextMenu;
         }
 
@@ -266,6 +346,13 @@ namespace Clipy
             var content = history.Content;
             if (content == null || content.Trim() == "") { return; }
             Clipboard.SetText(content);
+        }
+
+        private void MakeKeyAndVisiable()
+        {
+            Show();
+            SetForegroundWindow(Handle.ToInt32());
+            WindowState = FormWindowState.Normal;
         }
     }
 }
