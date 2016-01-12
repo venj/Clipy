@@ -89,6 +89,27 @@ namespace Clipy
             Application.Exit();
         }
 
+        private MenuItem deleteHistoriesMenu;
+        private MenuItem DeleteHistoriesMenu
+        {
+            get
+            {
+                if (deleteHistoriesMenu == null)
+                {
+                    deleteHistoriesMenu = new MenuItem();
+                    deleteHistoriesMenu.Text = "Delete Histories";
+                    deleteHistoriesMenu.Click += DeleteHistoriesMenu_Click; ;
+                }
+                return deleteHistoriesMenu;
+            }
+        }
+
+        private void DeleteHistoriesMenu_Click(object sender, EventArgs e)
+        {
+            var db = new DataProcess();
+            db.DeleteAllHistories();
+            histories = db.LoadHistories();
+        }
 
         public MainForm()
         {
@@ -314,7 +335,7 @@ namespace Clipy
 
         private void UpdateTrayMenu()
         {
-            if (histories.Count == 0)
+            if (histories == null || histories.Count == 0)
             {
                 var db = new DataProcess();
                 histories = db.LoadHistories();
@@ -341,6 +362,8 @@ namespace Clipy
             }
 
             // Add more menus.
+            contextMenu.MenuItems.Add("-");
+            contextMenu.MenuItems.Add(DeleteHistoriesMenu);
             contextMenu.MenuItems.Add("-");
             contextMenu.MenuItems.Add(EditMenu);
             contextMenu.MenuItems.Add(SettingsMenu);

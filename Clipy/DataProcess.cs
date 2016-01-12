@@ -155,6 +155,19 @@ namespace Clipy
             }
         }
 
+        public void DeleteAllHistories()
+        {
+            using (var conn = new SQLiteConnection(DataSource))
+            {
+                conn.Open();
+                using (SQLiteCommand command = new SQLiteCommand(conn))
+                {
+                    command.CommandText = "DELETE FROM Histories WHERE group_id IS NULL";
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
         public History LatestHistory()
         {
             var history = new History();
@@ -204,7 +217,7 @@ namespace Clipy
             }
             return list;
         }
-
+        
         public List<History> LoadSnippetsInGroup(Group group)
         {
             List<History> list = new List<History>();
