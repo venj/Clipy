@@ -15,7 +15,7 @@ namespace Clipy
         public static string DBPATH = Path.Combine(Environment.GetEnvironmentVariable("USERPROFILE"), "data.db");
         private string DataSource {
             get
-            {
+            { 
                 return "Data Source=" + DBPATH;
             }
         }
@@ -31,7 +31,7 @@ namespace Clipy
                     {
                         command.CommandText = "CREATE TABLE Groups(id integer NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, name string NOT NULL)";
                         command.ExecuteNonQuery();
-                        command.CommandText = "CREATE TABLE Histories(id integer NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, name string, content text, obj data, group_id integer, created_at timestamp)";
+                        command.CommandText = "CREATE TABLE Histories(id integer NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, name string UNIQUE, content text, obj data, group_id integer, created_at timestamp)";
                         command.ExecuteNonQuery();
                     }
                 }
@@ -192,6 +192,33 @@ namespace Clipy
             return history;
         }
 
+        public Group LoadGroup(string name)
+        {
+            Group group = null;
+            using (var conn = new SQLiteConnection(DataSource))
+            {
+                conn.Open();
+                using (SQLiteCommand command = new SQLiteCommand(conn))
+                {
+                    var sql = "SELECT * FROM groups WHERE name=@name";
+                    command.CommandText = sql;
+                    SQLiteParameter parameter = new SQLiteParameter();
+                    parameter.ParameterName = "@name";
+                    parameter.DbType = DbType.String;
+                    parameter.Direction = ParameterDirection.Input;
+                    parameter.Value = name;
+                    // Add the parameter to the Parameters collection. 
+                    command.Parameters.Add(parameter);
+                    var reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        group = new Group(reader.GetInt32(0), "" + reader.GetValue(1));
+                    }
+                }
+            }
+            return group;
+        }
+
         public List<History> LoadHistories()
         {
             List<History> list = new List<History>();
@@ -226,7 +253,7 @@ namespace Clipy
                 conn.Open();
                 using (SQLiteCommand command = new SQLiteCommand(conn))
                 {
-                    var sql = "SELECT * FROM histories WHERE group_id='@group_id' ORDER BY `id` DESC";
+                    var sql = "SELECT * FROM histories WHERE group_id=@group_id ORDER BY `id` DESC";
                     command.CommandText = sql;
                     SQLiteParameter parameter = new SQLiteParameter();
                     parameter.ParameterName = "@group_id";
@@ -252,20 +279,26 @@ namespace Clipy
             return list;
         }
 
-        public void SaveSnippet(History history, Group group)
+        public void SaveSnippet(Group group, string content, string name = "")
         {
             using (var conn = new SQLiteConnection(DataSource))
             {
                 conn.Open();
                 using (SQLiteCommand command = new SQLiteCommand(conn))
                 {
-                    command.CommandText = "INSERT INTO Histories ('content', 'group_id', 'created_at') values (@content, @group_id, @timestamp)";
+                    command.CommandText = "INSERT INTO Histories ('name', 'content', 'group_id', 'created_at') values (@name, @content, @group_id, @timestamp)";
+                    SQLiteParameter nameParam = new SQLiteParameter();
+                    nameParam.ParameterName = "@name";
+                    nameParam.DbType = DbType.String;
+                    nameParam.Direction = ParameterDirection.Input;
+                    nameParam.Value = name;
+                    command.Parameters.Add(nameParam);
+
                     SQLiteParameter contentParam = new SQLiteParameter();
                     contentParam.ParameterName = "@content";
                     contentParam.DbType = DbType.String;
                     contentParam.Direction = ParameterDirection.Input;
-                    contentParam.Value = history.Content;
-                    // Add the parameter to the Parameters collection. 
+                    contentParam.Value = content;
                     command.Parameters.Add(contentParam);
 
                     SQLiteParameter gidParam = new SQLiteParameter();
@@ -273,15 +306,13 @@ namespace Clipy
                     gidParam.DbType = DbType.Int32;
                     gidParam.Direction = ParameterDirection.Input;
                     gidParam.Value = group.Id;
-                    // Add the parameter to the Parameters collection. 
                     command.Parameters.Add(gidParam);
 
                     SQLiteParameter tsParam = new SQLiteParameter();
                     tsParam.ParameterName = "@timestamp";
                     tsParam.DbType = DbType.Time;
                     tsParam.Direction = ParameterDirection.Input;
-                    tsParam.Value = history.CreatedAt;
-                    // Add the parameter to the Parameters collection. 
+                    tsParam.Value = new DateTime();
                     command.Parameters.Add(tsParam);
 
                     command.ExecuteNonQuery();

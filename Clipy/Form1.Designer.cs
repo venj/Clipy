@@ -137,6 +137,7 @@
             this.groupsList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.groupsList.Size = new System.Drawing.Size(189, 340);
             this.groupsList.TabIndex = 9;
+            this.groupsList.SelectedIndexChanged += new System.EventHandler(this.groupList_SelectedIndexChanged);
             // 
             // verticalSplitter
             // 
@@ -168,6 +169,7 @@
             this.snippetsList.Name = "snippetsList";
             this.snippetsList.Size = new System.Drawing.Size(388, 112);
             this.snippetsList.TabIndex = 8;
+            this.snippetsList.SelectedIndexChanged += new System.EventHandler(this.snippetsList_SelectedIndexChanged);
             // 
             // contentTextBox
             // 

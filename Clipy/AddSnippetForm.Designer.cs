@@ -33,22 +33,22 @@
             this.snippetContentBox = new System.Windows.Forms.TextBox();
             this.addSnippetButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // groupListCombo
             // 
-            this.groupListCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupListCombo.FormattingEnabled = true;
-            this.groupListCombo.Location = new System.Drawing.Point(74, 10);
+            this.groupListCombo.Location = new System.Drawing.Point(220, 10);
             this.groupListCombo.Name = "groupListCombo";
-            this.groupListCombo.Size = new System.Drawing.Size(297, 20);
+            this.groupListCombo.Size = new System.Drawing.Size(125, 20);
             this.groupListCombo.TabIndex = 0;
             // 
             // groupLabel
             // 
             this.groupLabel.AutoSize = true;
-            this.groupLabel.Location = new System.Drawing.Point(13, 13);
+            this.groupLabel.Location = new System.Drawing.Point(179, 13);
             this.groupLabel.Name = "groupLabel";
             this.groupLabel.Size = new System.Drawing.Size(35, 12);
             this.groupLabel.TabIndex = 1;
@@ -63,13 +63,13 @@
             this.snippetContentBox.Multiline = true;
             this.snippetContentBox.Name = "snippetContentBox";
             this.snippetContentBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.snippetContentBox.Size = new System.Drawing.Size(359, 152);
+            this.snippetContentBox.Size = new System.Drawing.Size(381, 198);
             this.snippetContentBox.TabIndex = 2;
             // 
             // addSnippetButton
             // 
             this.addSnippetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.addSnippetButton.Location = new System.Drawing.Point(215, 194);
+            this.addSnippetButton.Location = new System.Drawing.Point(237, 240);
             this.addSnippetButton.Name = "addSnippetButton";
             this.addSnippetButton.Size = new System.Drawing.Size(75, 23);
             this.addSnippetButton.TabIndex = 3;
@@ -80,7 +80,7 @@
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.Location = new System.Drawing.Point(296, 194);
+            this.cancelButton.Location = new System.Drawing.Point(318, 240);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 4;
@@ -88,11 +88,29 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // nameLabel
+            // 
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(13, 13);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(29, 12);
+            this.nameLabel.TabIndex = 5;
+            this.nameLabel.Text = "Name";
+            // 
+            // nameTextBox
+            // 
+            this.nameTextBox.Location = new System.Drawing.Point(48, 9);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(125, 21);
+            this.nameTextBox.TabIndex = 6;
+            // 
             // AddSnippetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 229);
+            this.ClientSize = new System.Drawing.Size(405, 275);
+            this.Controls.Add(this.nameTextBox);
+            this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.addSnippetButton);
             this.Controls.Add(this.snippetContentBox);
@@ -115,5 +133,7 @@
         private System.Windows.Forms.TextBox snippetContentBox;
         private System.Windows.Forms.Button addSnippetButton;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.TextBox nameTextBox;
     }
 }

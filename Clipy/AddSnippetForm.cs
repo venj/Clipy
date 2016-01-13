@@ -42,7 +42,51 @@ namespace Clipy
 
         private void addSnippetButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Selected Index " + groupListCombo.SelectedIndex);
+
+            if (snippetContentBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Snippet can not be empty.");
+                return;
+            }
+
+            if (groupListCombo.Text.Trim() == "")
+            {
+                MessageBox.Show("Group can not be empty.");
+                return;
+            }
+
+            var db = new DataProcess();
+            int selectedIndex = groupListCombo.SelectedIndex;
+            string name = groupListCombo.Text;
+            Group selectedGroup;
+            if (selectedIndex == -1)
+            {
+                try
+                {
+                    db.AddGroup(name);
+                }
+                catch (Exception err)
+                {
+                    // TODO: Catch name unique error.
+                    MessageBox.Show(err.Message);
+                    return;
+                }
+                selectedGroup = db.LoadGroup(name);
+            }
+            else
+            {
+                selectedGroup = groups[selectedIndex];
+            }
+            try
+            {
+                db.SaveSnippet(selectedGroup, snippetContentBox.Text, nameTextBox.Text.Trim());
+                Close();
+            }
+            catch (Exception err) // catch potential error.
+            {
+                MessageBox.Show(err.Message);
+                return;
+            }
         }
     }
 }

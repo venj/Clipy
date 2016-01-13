@@ -27,6 +27,7 @@ namespace Clipy
         IntPtr nextClipboardViewer;
         List<Group> groups;
         List<History> histories;
+        List<History> currentSnippets;
 
         // Calculated Property
         private MenuItem settingsMenu;
@@ -119,7 +120,6 @@ namespace Clipy
             // Initialize database.
             DataProcess db = new DataProcess();
             ReloadGroupsUI();
-            ReloadHistoriesUI();
             // Initialize Tray Menu.
             UpdateTrayMenu();
             // Hide App When start.
@@ -183,7 +183,6 @@ namespace Clipy
                     var db = new DataProcess();
                     db.SaveHistory(history);
                     histories = db.LoadHistories();
-                    ReloadHistoriesUI();
                     UpdateTrayMenu();
                 }
             }
@@ -196,6 +195,8 @@ namespace Clipy
 
         private void groupList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            snippetsList.Items.Clear(); // Clear snippetsList
+
             var selectionCount = groupsList.SelectedIndices.Count;
             if (selectionCount == 1)
             {
@@ -215,8 +216,13 @@ namespace Clipy
             int selectedIndex = ((ListBox)sender).SelectedIndex;
             if (selectedIndex >= groups.Count || selectedIndex < 0) { return; }
             var group = groups[selectedIndex];
-            // TODO: Do more, like show snippets in the groups.
-            Console.WriteLine(string.Format("id: {0}, name: {1}", group.Id, group.Name));
+            var db = new DataProcess();
+            currentSnippets = db.LoadSnippetsInGroup(group);
+            currentSnippets.ForEach(s => {
+                var nameText = "(No Name)";
+                if (s.Name.Count() != 0) { nameText = s.Name; }
+                snippetsList.Items.Add(nameText);
+            });
         }
 
         private void addGroupButton_Click(object sender, EventArgs e)
@@ -274,34 +280,6 @@ namespace Clipy
                 db.RenameGroup(group, input);
                 ReloadGroupsUI();
             }
-        }
-
-        private void ReloadHistoriesUI()
-        {
-            if (groupsList.SelectedIndices.Count != 1)
-            {
-                snippetsList.Items.Clear();
-            }
-            else
-            {
-                DataProcess db = new DataProcess();
-                histories = db.LoadHistories();
-                snippetsList.Items.Clear();
-                histories.ForEach((h) => {
-                    var c = h.Content.Trim();
-                    if (c.Count() > 50)
-                    {
-                        c = c.Substring(0, 50);
-                    }
-                    snippetsList.Items.Add(c);
-                });
-            }
-        }
-
-        private void historiesList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var index = snippetsList.SelectedIndex;
-            contentTextBox.Text = histories[index].Content;
         }
 
         private void historiesList_DoubleClick(object sender, EventArgs e)
@@ -407,6 +385,17 @@ namespace Clipy
             var addForm = new AddSnippetForm();
             addForm.SelectedId = groupsList.SelectedIndex;
             addForm.ShowDialog();
+            // Execute after dialog finished?
+            ReloadGroupsUI();
+        }
+
+        private void snippetsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            contentTextBox.Text = "";
+            int selectedIndex = snippetsList.SelectedIndex;
+            if (selectedIndex < 0 || selectedIndex >= currentSnippets.Count()) { return; }
+            var snippet = currentSnippets[selectedIndex];
+            contentTextBox.Text = snippet.Content;
         }
     }
 }
