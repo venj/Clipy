@@ -362,6 +362,16 @@ namespace Clipy
                 menu.MenuItems.Add(subMenu);
             }
 
+            // Seperator
+            contextMenu.MenuItems.Add("-");
+
+            // Add groups
+            if (groups == null) { groups = new DataProcess().LoadGroups(); }
+            groups.ForEach((g) => {
+                contextMenu.MenuItems.Add(g.Name);
+                //TODO: Add sub menus here.
+            });
+
             // Add more menus.
             contextMenu.MenuItems.Add("-");
             contextMenu.MenuItems.Add(DeleteHistoriesMenu);
@@ -392,6 +402,12 @@ namespace Clipy
             WindowState = FormWindowState.Normal;
         }
 
+        private void addSnippetButton_Click(object sender, EventArgs e)
+        {
+            var addForm = new AddSnippetForm();
+            addForm.SelectedId = groupsList.SelectedIndex;
+            addForm.ShowDialog();
+        }
     }
 }
 

@@ -177,6 +177,7 @@
             this.contentTextBox.Location = new System.Drawing.Point(0, 0);
             this.contentTextBox.Multiline = true;
             this.contentTextBox.Name = "contentTextBox";
+            this.contentTextBox.ReadOnly = true;
             this.contentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.contentTextBox.Size = new System.Drawing.Size(388, 257);
             this.contentTextBox.TabIndex = 10;
@@ -189,6 +190,7 @@
             this.addSnippetButton.TabIndex = 7;
             this.addSnippetButton.Text = "Add";
             this.addSnippetButton.UseVisualStyleBackColor = true;
+            this.addSnippetButton.Click += new System.EventHandler(this.addSnippetButton_Click);
             // 
             // deleteSnippetButton
             // 
