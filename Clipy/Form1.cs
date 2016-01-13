@@ -170,7 +170,7 @@ namespace Clipy
         void ClipboardDataChanged()
         {
             IDataObject iData = Clipboard.GetDataObject();
-
+            if (iData == null) { MessageBox.Show("Null!"); }
             try
             {
                 if (iData.GetDataPresent(DataFormats.Text))
