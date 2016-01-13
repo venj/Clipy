@@ -109,6 +109,7 @@ namespace Clipy
             var db = new DataProcess();
             db.DeleteAllHistories();
             histories = db.LoadHistories();
+            UpdateTrayMenu();
         }
 
         public MainForm()
