@@ -170,7 +170,7 @@ namespace Clipy
 
         public History LatestHistory()
         {
-            var history = new History();
+            History history = new History();
             using (var conn = new SQLiteConnection(DataSource))
             {
                 conn.Open();
@@ -178,6 +178,37 @@ namespace Clipy
                 {
                     var sql = "SELECT * FROM Histories ORDER BY `id` DESC LIMIT 1";
                     command.CommandText = sql;
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        history.Id = reader.GetInt32(0);
+                        history.Name = "" + reader.GetValue(1);
+                        history.Content = "" + reader.GetValue(2);
+                        // obj 3, group_id 4
+                        history.CreatedAt = reader.GetDateTime(5);
+                    }
+                }
+            }
+            return history;
+        }
+
+        public History LoadHistoryOfId(int hid)
+        {
+            History history = new History();
+            using (var conn = new SQLiteConnection(DataSource))
+            {
+                conn.Open();
+                using (SQLiteCommand command = new SQLiteCommand(conn))
+                {
+                    var sql = "SELECT * FROM Histories WHERE id=@hid";
+                    command.CommandText = sql;
+                    SQLiteParameter parameter = new SQLiteParameter();
+                    parameter.ParameterName = "@hid";
+                    parameter.DbType = DbType.Int32;
+                    parameter.Direction = ParameterDirection.Input;
+                    parameter.Value = hid;
+                    // Add the parameter to the Parameters collection. 
+                    command.Parameters.Add(parameter);
                     var reader = command.ExecuteReader();
                     while (reader.Read())
                     {
@@ -210,7 +241,7 @@ namespace Clipy
                     // Add the parameter to the Parameters collection. 
                     command.Parameters.Add(parameter);
                     var reader = command.ExecuteReader();
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         group = new Group(reader.GetInt32(0), "" + reader.GetValue(1));
                     }

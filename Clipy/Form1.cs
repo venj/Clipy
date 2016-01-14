@@ -182,7 +182,6 @@ namespace Clipy
                     history.CreatedAt = DateTime.Now;
                     var db = new DataProcess();
                     db.SaveHistory(history);
-                    histories = db.LoadHistories();
                     UpdateTrayMenu();
                 }
             }
@@ -314,40 +313,48 @@ namespace Clipy
 
         private void UpdateTrayMenu()
         {
-            if (histories == null || histories.Count == 0)
-            {
-                var db = new DataProcess();
-                histories = db.LoadHistories();
-            }
-
-            var contextMenu = new ContextMenu();
-            int totalItems = Math.Min(histories.Count, MAX_COUNT);
+            var db = new DataProcess();
+            histories = db.LoadHistories();
             
-            MenuItem menu = new MenuItem(); // dummy 
-            for (int i = 0; i < totalItems; i++) {
-                if (i % 10 == 0)
-                {
-                    menu = new MenuItem();
-                    menu.Text = string.Format("{0} - {1}", 1 + i, (i / 10 + 1) * 10);
-                    contextMenu.MenuItems.Add(menu);
-                }
-                MenuItem subMenu = new MenuItem();
-                var content = histories[i].Content.Trim();
-                subMenu.Text = content.Substring(0, Math.Min(content.Count(), MAX_MENU_TITLE));
-                // TODO: Tooltip? 
-                subMenu.Tag = i;
-                subMenu.Click += SubMenu_Click;
-                menu.MenuItems.Add(subMenu);
-            }
+            var contextMenu = new ContextMenu();
+            organizeHistoriesMenu(contextMenu, histories, SubMenu_Click);
 
             // Seperator
             contextMenu.MenuItems.Add("-");
 
             // Add groups
             if (groups == null) { groups = new DataProcess().LoadGroups(); }
+            
             groups.ForEach((g) => {
-                contextMenu.MenuItems.Add(g.Name);
+                MenuItem m = new MenuItem(g.Name);
+                contextMenu.MenuItems.Add(m);
                 //TODO: Add sub menus here.
+                var historiesInGroup = db.LoadSnippetsInGroup(g);
+                if (historiesInGroup.Count() == 0)
+                {
+                    m.Enabled = false;
+                }
+                else
+                {
+                    m.Enabled = true;
+                }
+                if (historiesInGroup.Count() > 10) //FIXME: Magic
+                {
+                    organizeHistoriesMenu(m, historiesInGroup, Snippet_Click);
+                }
+                else
+                {
+                    for (int i = 0; i < historiesInGroup.Count(); ++i)
+                    {
+                        MenuItem subMenu = new MenuItem();
+                        var history = historiesInGroup[i];
+                        var content = history.Content.Trim();
+                        subMenu.Text = content.Substring(0, Math.Min(content.Count(), MAX_MENU_TITLE));
+                        subMenu.Tag = history.Id;
+                        subMenu.Click += Snippet_Click;
+                        m.MenuItems.Add(subMenu);
+                    }
+                }
             });
 
             // Add more menus.
@@ -362,13 +369,45 @@ namespace Clipy
             notifyIcon1.ContextMenu = contextMenu;
         }
 
+        private void organizeHistoriesMenu(Menu parentMenu, List<History> histories, EventHandler menuEventHandler)
+        {
+            int totalItems = Math.Min(histories.Count, MAX_COUNT);
+
+            MenuItem menu = new MenuItem(); // dummy 
+            for (int i = 0; i < totalItems; i++)
+            {
+                if (i % 10 == 0)
+                {
+                    menu = new MenuItem();
+                    menu.Text = string.Format("{0} - {1}", 1 + i, (i / 10 + 1) * 10);
+                    parentMenu.MenuItems.Add(menu);
+                }
+                MenuItem subMenu = new MenuItem();
+                var history = histories[i];
+                var content = history.Content.Trim();
+                subMenu.Text = content.Substring(0, Math.Min(content.Count(), MAX_MENU_TITLE));
+                // TODO: Tooltip? 
+                subMenu.Tag = history.Id;
+                subMenu.Click += menuEventHandler;
+                menu.MenuItems.Add(subMenu);
+            }
+        }
+
         private void SubMenu_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show(String.Format("Menu clicked {0}.", ((MenuItem)sender).Tag));
             int tag = (int)((MenuItem)sender).Tag;
-            var history = histories[tag];
+            var history = histories.First(h => h.Id == tag);
+            var content = history?.Content;
+            if (content == null || content.Trim() == "") { return; }
+            Clipboard.SetText(content);
+        }
 
-            var content = history.Content;
+        private void Snippet_Click(object sender, EventArgs e)
+        {
+            int tag = (int)((MenuItem)sender).Tag;
+            var db = new DataProcess();
+            var history = db.LoadHistoryOfId(tag);
+            var content = history?.Content; // In case history is null.
             if (content == null || content.Trim() == "") { return; }
             Clipboard.SetText(content);
         }
@@ -387,6 +426,7 @@ namespace Clipy
             addForm.ShowDialog();
             // Execute after dialog finished?
             ReloadGroupsUI();
+            UpdateTrayMenu();
         }
 
         private void snippetsList_SelectedIndexChanged(object sender, EventArgs e)
