@@ -176,7 +176,7 @@ namespace Clipy
                 conn.Open();
                 using (SQLiteCommand command = new SQLiteCommand(conn))
                 {
-                    var sql = "SELECT * FROM Histories ORDER BY `id` DESC LIMIT 1";
+                    var sql = "SELECT * FROM Histories WHERE `group_id` IS NULL ORDER BY `id` DESC LIMIT 1";
                     command.CommandText = sql;
                     var reader = command.ExecuteReader();
                     while (reader.Read())
@@ -216,6 +216,7 @@ namespace Clipy
                         history.Name = "" + reader.GetValue(1);
                         history.Content = "" + reader.GetValue(2);
                         // obj 3, group_id 4
+                        history.GroupID = reader.GetInt32(4);
                         history.CreatedAt = reader.GetDateTime(5);
                     }
                 }
@@ -258,7 +259,7 @@ namespace Clipy
                 conn.Open();
                 using (SQLiteCommand command = new SQLiteCommand(conn))
                 {
-                    var sql = "SELECT * FROM histories ORDER BY `id` DESC";
+                    var sql = "SELECT * FROM histories WHERE `group_id` IS NULL ORDER BY `id` DESC";
                     command.CommandText = sql;
                     var reader = command.ExecuteReader();
                     while (reader.Read())
