@@ -12,7 +12,7 @@ namespace Clipy
     class DataProcess
     {
         //private SQLiteConnection conn;
-        public static string DBPATH = Path.Combine(Environment.GetEnvironmentVariable("USERPROFILE"), "data.db");
+        public static string DBPATH = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "data.db");
         private string DataSource {
             get
             { 
