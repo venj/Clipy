@@ -134,6 +134,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -150,6 +151,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\add_small.png" />
+    <None Include="Resources\add_small1.png" />
+    <None Include="Resources\edit_small.png" />
+    <None Include="Resources\delete_small.png" />
     <Content Include="trayicon.ico" />
   </ItemGroup>
   <ItemGroup>

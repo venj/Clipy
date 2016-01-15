@@ -41,9 +41,9 @@
             this.verticalSplitter = new System.Windows.Forms.SplitContainer();
             this.snippetsList = new System.Windows.Forms.ListBox();
             this.contentTextBox = new System.Windows.Forms.TextBox();
-            this.addSnippetButton = new System.Windows.Forms.Button();
             this.deleteSnippetButton = new System.Windows.Forms.Button();
             this.editSnippetButton = new System.Windows.Forms.Button();
+            this.addSnippetButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.horizontalSplitter)).BeginInit();
             this.horizontalSplitter.Panel1.SuspendLayout();
             this.horizontalSplitter.Panel2.SuspendLayout();
@@ -66,7 +66,7 @@
             this.horizontalSplitter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.horizontalSplitter.Location = new System.Drawing.Point(12, 63);
+            this.horizontalSplitter.Location = new System.Drawing.Point(12, 78);
             this.horizontalSplitter.Name = "horizontalSplitter";
             // 
             // horizontalSplitter.Panel1
@@ -80,7 +80,7 @@
             // horizontalSplitter.Panel2
             // 
             this.horizontalSplitter.Panel2.Controls.Add(this.verticalSplitter);
-            this.horizontalSplitter.Size = new System.Drawing.Size(595, 279);
+            this.horizontalSplitter.Size = new System.Drawing.Size(595, 264);
             this.horizontalSplitter.SplitterDistance = 198;
             this.horizontalSplitter.TabIndex = 6;
             // 
@@ -88,7 +88,7 @@
             // 
             this.renameGroupButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.renameGroupButton.Enabled = false;
-            this.renameGroupButton.Location = new System.Drawing.Point(3, 253);
+            this.renameGroupButton.Location = new System.Drawing.Point(3, 238);
             this.renameGroupButton.Name = "renameGroupButton";
             this.renameGroupButton.Size = new System.Drawing.Size(64, 23);
             this.renameGroupButton.TabIndex = 13;
@@ -100,7 +100,7 @@
             // 
             this.deleteGroupButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.deleteGroupButton.Enabled = false;
-            this.deleteGroupButton.Location = new System.Drawing.Point(73, 253);
+            this.deleteGroupButton.Location = new System.Drawing.Point(73, 238);
             this.deleteGroupButton.Name = "deleteGroupButton";
             this.deleteGroupButton.Size = new System.Drawing.Size(66, 23);
             this.deleteGroupButton.TabIndex = 12;
@@ -137,7 +137,7 @@
             this.groupsList.ItemHeight = 12;
             this.groupsList.Location = new System.Drawing.Point(3, 30);
             this.groupsList.Name = "groupsList";
-            this.groupsList.Size = new System.Drawing.Size(191, 220);
+            this.groupsList.Size = new System.Drawing.Size(191, 196);
             this.groupsList.TabIndex = 9;
             this.groupsList.SelectedIndexChanged += new System.EventHandler(this.groupList_SelectedIndexChanged);
             // 
@@ -155,8 +155,8 @@
             // verticalSplitter.Panel2
             // 
             this.verticalSplitter.Panel2.Controls.Add(this.contentTextBox);
-            this.verticalSplitter.Size = new System.Drawing.Size(393, 279);
-            this.verticalSplitter.SplitterDistance = 100;
+            this.verticalSplitter.Size = new System.Drawing.Size(393, 264);
+            this.verticalSplitter.SplitterDistance = 94;
             this.verticalSplitter.TabIndex = 0;
             // 
             // snippetsList
@@ -169,7 +169,7 @@
             this.snippetsList.Location = new System.Drawing.Point(0, 0);
             this.snippetsList.Name = "snippetsList";
             this.snippetsList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.snippetsList.Size = new System.Drawing.Size(393, 100);
+            this.snippetsList.Size = new System.Drawing.Size(393, 88);
             this.snippetsList.TabIndex = 8;
             this.snippetsList.SelectedIndexChanged += new System.EventHandler(this.snippetsList_SelectedIndexChanged);
             this.snippetsList.DoubleClick += new System.EventHandler(this.snippetsList_DoubleClick);
@@ -184,40 +184,49 @@
             this.contentTextBox.Name = "contentTextBox";
             this.contentTextBox.ReadOnly = true;
             this.contentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.contentTextBox.Size = new System.Drawing.Size(393, 170);
+            this.contentTextBox.Size = new System.Drawing.Size(393, 161);
             this.contentTextBox.TabIndex = 10;
-            // 
-            // addSnippetButton
-            // 
-            this.addSnippetButton.Location = new System.Drawing.Point(15, 12);
-            this.addSnippetButton.Name = "addSnippetButton";
-            this.addSnippetButton.Size = new System.Drawing.Size(50, 45);
-            this.addSnippetButton.TabIndex = 7;
-            this.addSnippetButton.Text = "Add";
-            this.addSnippetButton.UseVisualStyleBackColor = true;
-            this.addSnippetButton.Click += new System.EventHandler(this.addSnippetButton_Click);
             // 
             // deleteSnippetButton
             // 
             this.deleteSnippetButton.Enabled = false;
-            this.deleteSnippetButton.Location = new System.Drawing.Point(127, 12);
+            this.deleteSnippetButton.Image = ((System.Drawing.Image)(resources.GetObject("deleteSnippetButton.Image")));
+            this.deleteSnippetButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.deleteSnippetButton.Location = new System.Drawing.Point(146, 12);
             this.deleteSnippetButton.Name = "deleteSnippetButton";
-            this.deleteSnippetButton.Size = new System.Drawing.Size(50, 45);
+            this.deleteSnippetButton.Size = new System.Drawing.Size(60, 60);
             this.deleteSnippetButton.TabIndex = 8;
             this.deleteSnippetButton.Text = "Delete";
+            this.deleteSnippetButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.deleteSnippetButton.UseVisualStyleBackColor = true;
             this.deleteSnippetButton.Click += new System.EventHandler(this.deleteSnippetButton_Click);
             // 
             // editSnippetButton
             // 
             this.editSnippetButton.Enabled = false;
-            this.editSnippetButton.Location = new System.Drawing.Point(71, 12);
+            this.editSnippetButton.Image = ((System.Drawing.Image)(resources.GetObject("editSnippetButton.Image")));
+            this.editSnippetButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.editSnippetButton.Location = new System.Drawing.Point(81, 12);
             this.editSnippetButton.Name = "editSnippetButton";
-            this.editSnippetButton.Size = new System.Drawing.Size(50, 45);
+            this.editSnippetButton.Size = new System.Drawing.Size(60, 60);
             this.editSnippetButton.TabIndex = 9;
             this.editSnippetButton.Text = "Edit";
+            this.editSnippetButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.editSnippetButton.UseVisualStyleBackColor = true;
             this.editSnippetButton.Click += new System.EventHandler(this.editSnippetButton_Click);
+            // 
+            // addSnippetButton
+            // 
+            this.addSnippetButton.Image = global::Clipy.Properties.Resources.add_small;
+            this.addSnippetButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.addSnippetButton.Location = new System.Drawing.Point(15, 12);
+            this.addSnippetButton.Name = "addSnippetButton";
+            this.addSnippetButton.Size = new System.Drawing.Size(60, 60);
+            this.addSnippetButton.TabIndex = 7;
+            this.addSnippetButton.Text = "Add";
+            this.addSnippetButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.addSnippetButton.UseVisualStyleBackColor = true;
+            this.addSnippetButton.Click += new System.EventHandler(this.addSnippetButton_Click);
             // 
             // MainForm
             // 
@@ -230,7 +239,7 @@
             this.Controls.Add(this.horizontalSplitter);
             this.MinimumSize = new System.Drawing.Size(480, 320);
             this.Name = "MainForm";
-            this.Text = "Edit Snippets";
+            this.Text = "Snippets";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
