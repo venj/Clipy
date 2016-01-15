@@ -1,10 +1,12 @@
 # Clipy
 
-**This is a WORK-IN-PROGRESS small app.**
+**Work in progress.**
 
 Clipboard history management app for Windows.
 
-Main feature is basically usable. But edit, delete features are not done yet. 
+Main features are basically usable. Settings pane and keyboard shortcut is not available yet. 
+
+![Screenshot](screenshot.png)
 
 ## Installation
 
