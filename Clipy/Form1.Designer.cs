@@ -43,7 +43,7 @@
             this.contentTextBox = new System.Windows.Forms.TextBox();
             this.addSnippetButton = new System.Windows.Forms.Button();
             this.deleteSnippetButton = new System.Windows.Forms.Button();
-            this.saveButton = new System.Windows.Forms.Button();
+            this.editSnippetButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.horizontalSplitter)).BeginInit();
             this.horizontalSplitter.Panel1.SuspendLayout();
             this.horizontalSplitter.Panel2.SuspendLayout();
@@ -80,31 +80,33 @@
             // horizontalSplitter.Panel2
             // 
             this.horizontalSplitter.Panel2.Controls.Add(this.verticalSplitter);
-            this.horizontalSplitter.Size = new System.Drawing.Size(588, 403);
-            this.horizontalSplitter.SplitterDistance = 196;
+            this.horizontalSplitter.Size = new System.Drawing.Size(595, 279);
+            this.horizontalSplitter.SplitterDistance = 198;
             this.horizontalSplitter.TabIndex = 6;
             // 
             // renameGroupButton
             // 
             this.renameGroupButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.renameGroupButton.Enabled = false;
-            this.renameGroupButton.Location = new System.Drawing.Point(3, 377);
+            this.renameGroupButton.Location = new System.Drawing.Point(3, 253);
             this.renameGroupButton.Name = "renameGroupButton";
             this.renameGroupButton.Size = new System.Drawing.Size(64, 23);
             this.renameGroupButton.TabIndex = 13;
             this.renameGroupButton.Text = "Rename";
             this.renameGroupButton.UseVisualStyleBackColor = true;
+            this.renameGroupButton.Click += new System.EventHandler(this.renameGroupButton_Click);
             // 
             // deleteGroupButton
             // 
             this.deleteGroupButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.deleteGroupButton.Enabled = false;
-            this.deleteGroupButton.Location = new System.Drawing.Point(73, 377);
+            this.deleteGroupButton.Location = new System.Drawing.Point(73, 253);
             this.deleteGroupButton.Name = "deleteGroupButton";
             this.deleteGroupButton.Size = new System.Drawing.Size(66, 23);
             this.deleteGroupButton.TabIndex = 12;
             this.deleteGroupButton.Text = "Delete";
             this.deleteGroupButton.UseVisualStyleBackColor = true;
+            this.deleteGroupButton.Click += new System.EventHandler(this.deleteGroupButton_Click);
             // 
             // groupNameTextBox
             // 
@@ -112,18 +114,19 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupNameTextBox.Location = new System.Drawing.Point(3, 3);
             this.groupNameTextBox.Name = "groupNameTextBox";
-            this.groupNameTextBox.Size = new System.Drawing.Size(160, 21);
+            this.groupNameTextBox.Size = new System.Drawing.Size(162, 21);
             this.groupNameTextBox.TabIndex = 11;
             // 
             // addGroupButton
             // 
             this.addGroupButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addGroupButton.Location = new System.Drawing.Point(169, 2);
+            this.addGroupButton.Location = new System.Drawing.Point(171, 2);
             this.addGroupButton.Name = "addGroupButton";
             this.addGroupButton.Size = new System.Drawing.Size(23, 23);
             this.addGroupButton.TabIndex = 10;
             this.addGroupButton.Text = "+";
             this.addGroupButton.UseVisualStyleBackColor = true;
+            this.addGroupButton.Click += new System.EventHandler(this.addGroupButton_Click);
             // 
             // groupsList
             // 
@@ -134,8 +137,7 @@
             this.groupsList.ItemHeight = 12;
             this.groupsList.Location = new System.Drawing.Point(3, 30);
             this.groupsList.Name = "groupsList";
-            this.groupsList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.groupsList.Size = new System.Drawing.Size(189, 340);
+            this.groupsList.Size = new System.Drawing.Size(191, 220);
             this.groupsList.TabIndex = 9;
             this.groupsList.SelectedIndexChanged += new System.EventHandler(this.groupList_SelectedIndexChanged);
             // 
@@ -152,10 +154,9 @@
             // 
             // verticalSplitter.Panel2
             // 
-            this.verticalSplitter.Panel2.Controls.Add(this.saveButton);
             this.verticalSplitter.Panel2.Controls.Add(this.contentTextBox);
-            this.verticalSplitter.Size = new System.Drawing.Size(388, 403);
-            this.verticalSplitter.SplitterDistance = 109;
+            this.verticalSplitter.Size = new System.Drawing.Size(393, 279);
+            this.verticalSplitter.SplitterDistance = 100;
             this.verticalSplitter.TabIndex = 0;
             // 
             // snippetsList
@@ -167,21 +168,23 @@
             this.snippetsList.ItemHeight = 12;
             this.snippetsList.Location = new System.Drawing.Point(0, 0);
             this.snippetsList.Name = "snippetsList";
-            this.snippetsList.Size = new System.Drawing.Size(388, 112);
+            this.snippetsList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.snippetsList.Size = new System.Drawing.Size(393, 100);
             this.snippetsList.TabIndex = 8;
             this.snippetsList.SelectedIndexChanged += new System.EventHandler(this.snippetsList_SelectedIndexChanged);
+            this.snippetsList.DoubleClick += new System.EventHandler(this.snippetsList_DoubleClick);
             // 
             // contentTextBox
             // 
             this.contentTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.contentTextBox.Location = new System.Drawing.Point(0, 0);
+            this.contentTextBox.Location = new System.Drawing.Point(0, 2);
             this.contentTextBox.Multiline = true;
             this.contentTextBox.Name = "contentTextBox";
             this.contentTextBox.ReadOnly = true;
             this.contentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.contentTextBox.Size = new System.Drawing.Size(388, 257);
+            this.contentTextBox.Size = new System.Drawing.Size(393, 170);
             this.contentTextBox.TabIndex = 10;
             // 
             // addSnippetButton
@@ -196,28 +199,32 @@
             // 
             // deleteSnippetButton
             // 
-            this.deleteSnippetButton.Location = new System.Drawing.Point(71, 12);
+            this.deleteSnippetButton.Enabled = false;
+            this.deleteSnippetButton.Location = new System.Drawing.Point(127, 12);
             this.deleteSnippetButton.Name = "deleteSnippetButton";
             this.deleteSnippetButton.Size = new System.Drawing.Size(50, 45);
             this.deleteSnippetButton.TabIndex = 8;
             this.deleteSnippetButton.Text = "Delete";
             this.deleteSnippetButton.UseVisualStyleBackColor = true;
+            this.deleteSnippetButton.Click += new System.EventHandler(this.deleteSnippetButton_Click);
             // 
-            // saveButton
+            // editSnippetButton
             // 
-            this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.saveButton.Location = new System.Drawing.Point(313, 263);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 11;
-            this.saveButton.Text = "Save";
-            this.saveButton.UseVisualStyleBackColor = true;
+            this.editSnippetButton.Enabled = false;
+            this.editSnippetButton.Location = new System.Drawing.Point(71, 12);
+            this.editSnippetButton.Name = "editSnippetButton";
+            this.editSnippetButton.Size = new System.Drawing.Size(50, 45);
+            this.editSnippetButton.TabIndex = 9;
+            this.editSnippetButton.Text = "Edit";
+            this.editSnippetButton.UseVisualStyleBackColor = true;
+            this.editSnippetButton.Click += new System.EventHandler(this.editSnippetButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 478);
+            this.ClientSize = new System.Drawing.Size(619, 354);
+            this.Controls.Add(this.editSnippetButton);
             this.Controls.Add(this.deleteSnippetButton);
             this.Controls.Add(this.addSnippetButton);
             this.Controls.Add(this.horizontalSplitter);
@@ -254,7 +261,7 @@
         private System.Windows.Forms.TextBox contentTextBox;
         private System.Windows.Forms.Button addSnippetButton;
         private System.Windows.Forms.Button deleteSnippetButton;
-        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button editSnippetButton;
     }
 }
 

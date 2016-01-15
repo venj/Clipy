@@ -73,7 +73,7 @@
             this.addSnippetButton.Name = "addSnippetButton";
             this.addSnippetButton.Size = new System.Drawing.Size(75, 23);
             this.addSnippetButton.TabIndex = 3;
-            this.addSnippetButton.Text = "Add";
+            this.addSnippetButton.Text = "Save";
             this.addSnippetButton.UseVisualStyleBackColor = true;
             this.addSnippetButton.Click += new System.EventHandler(this.addSnippetButton_Click);
             // 

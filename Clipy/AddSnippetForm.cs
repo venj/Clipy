@@ -13,6 +13,7 @@ namespace Clipy
     public partial class AddSnippetForm : Form
     {
         public int SelectedId { get; set; }
+        private History _currentHistory;
 
         private List<Group> groups;
         public AddSnippetForm()
@@ -20,6 +21,14 @@ namespace Clipy
             InitializeComponent();
             var db = new DataProcess();
             groups = db.LoadGroups();
+        }
+
+        public AddSnippetForm(History h)
+        {
+            InitializeComponent();
+            var db = new DataProcess();
+            groups = db.LoadGroups();
+            _currentHistory = h;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -38,11 +47,21 @@ namespace Clipy
         {
             FillComboBox();
             groupListCombo.SelectedIndex = SelectedId;
+            nameTextBox.Focus();
+            if (_currentHistory != null)
+            {
+                nameTextBox.Text = _currentHistory.Name;
+                snippetContentBox.Text = _currentHistory.Content;
+                Text = "Edit snippet";
+            }
+            else
+            {
+                Text = "Add snippet";
+            }
         }
 
         private void addSnippetButton_Click(object sender, EventArgs e)
         {
-
             if (snippetContentBox.Text.Trim() == "")
             {
                 MessageBox.Show("Snippet can not be empty.");
@@ -77,16 +96,33 @@ namespace Clipy
             {
                 selectedGroup = groups[selectedIndex];
             }
-            try
+            if (_currentHistory == null)
             {
-                db.SaveSnippet(selectedGroup, snippetContentBox.Text, nameTextBox.Text.Trim());
-                Close();
+                try
+                {
+                    db.SaveSnippet(selectedGroup, snippetContentBox.Text, nameTextBox.Text.Trim());
+                    Close();
+                }
+                catch (Exception err) // catch potential error.
+                {
+                    MessageBox.Show(err.Message);
+                    return;
+                }
             }
-            catch (Exception err) // catch potential error.
+            else
             {
-                MessageBox.Show(err.Message);
-                return;
+                try
+                {
+                    db.UpdateSnippet(_currentHistory, selectedGroup, snippetContentBox.Text, nameTextBox.Text.Trim());
+                    Close();
+                }
+                catch (Exception err) // catch potential error.
+                {
+                    MessageBox.Show(err.Message);
+                    return;
+                }
             }
+            
         }
     }
 }

@@ -65,7 +65,7 @@ namespace Clipy
                 conn.Open();
                 using (SQLiteCommand command = new SQLiteCommand(conn))
                 {
-                    command.CommandText = "DELETE FROM Groups where id=@gid";
+                    command.CommandText = "DELETE FROM Groups WHERE id=@gid; DELETE FROM Histories WHERE group_id=@gid";
                     SQLiteParameter parameter = new SQLiteParameter();
                     parameter.ParameterName = "@gid";
                     parameter.DbType = DbType.Int32;
@@ -163,6 +163,26 @@ namespace Clipy
                 using (SQLiteCommand command = new SQLiteCommand(conn))
                 {
                     command.CommandText = "DELETE FROM Histories WHERE group_id IS NULL";
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeleteHistory(History h)
+        {
+            using (var conn = new SQLiteConnection(DataSource))
+            {
+                conn.Open();
+                using (SQLiteCommand command = new SQLiteCommand(conn))
+                {
+                    command.CommandText = "DELETE FROM Histories WHERE id=@hid";
+                    SQLiteParameter contentParam = new SQLiteParameter();
+                    contentParam.ParameterName = "@hid";
+                    contentParam.DbType = DbType.Int32;
+                    contentParam.Direction = ParameterDirection.Input;
+                    contentParam.Value = h.Id;
+                    // Add the parameter to the Parameters collection. 
+                    command.Parameters.Add(contentParam);
                     command.ExecuteNonQuery();
                 }
             }
@@ -346,6 +366,47 @@ namespace Clipy
                     tsParam.Direction = ParameterDirection.Input;
                     tsParam.Value = new DateTime();
                     command.Parameters.Add(tsParam);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void UpdateSnippet(History history, Group group, string content, string name = "")
+        {
+            using (var conn = new SQLiteConnection(DataSource))
+            {
+                conn.Open();
+                using (SQLiteCommand command = new SQLiteCommand(conn))
+                {
+                    command.CommandText = "Update Histories SET name=@name, content=@content, group_id=@group_id WHERE id=@hid";
+                    SQLiteParameter nameParam = new SQLiteParameter();
+                    nameParam.ParameterName = "@name";
+                    nameParam.DbType = DbType.String;
+                    nameParam.Direction = ParameterDirection.Input;
+                    nameParam.Value = name;
+                    command.Parameters.Add(nameParam);
+
+                    SQLiteParameter contentParam = new SQLiteParameter();
+                    contentParam.ParameterName = "@content";
+                    contentParam.DbType = DbType.String;
+                    contentParam.Direction = ParameterDirection.Input;
+                    contentParam.Value = content;
+                    command.Parameters.Add(contentParam);
+
+                    SQLiteParameter gidParam = new SQLiteParameter();
+                    gidParam.ParameterName = "@group_id";
+                    gidParam.DbType = DbType.Int32;
+                    gidParam.Direction = ParameterDirection.Input;
+                    gidParam.Value = group.Id;
+                    command.Parameters.Add(gidParam);
+
+                    SQLiteParameter hidParam = new SQLiteParameter();
+                    hidParam.ParameterName = "@hid";
+                    hidParam.DbType = DbType.Int32;
+                    hidParam.Direction = ParameterDirection.Input;
+                    hidParam.Value = history.Id;
+                    command.Parameters.Add(hidParam);
 
                     command.ExecuteNonQuery();
                 }

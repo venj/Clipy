@@ -19,9 +19,10 @@ namespace Clipy
         [DllImport("User32.dll")]
         public static extern Int32 SetForegroundWindow(int hWnd);
 
-        // Should go to settings later.
+        //TODO: Should go to settings later.
         private int MAX_COUNT = 50;
         private int MAX_MENU_TITLE = 20;
+        private int NUMBER_OF_ITEMS_PER_GROUP = 10;
 
         // Local variable
         IntPtr nextClipboardViewer;
@@ -107,10 +108,18 @@ namespace Clipy
 
         private void DeleteHistoriesMenu_Click(object sender, EventArgs e)
         {
-            var db = new DataProcess();
-            db.DeleteAllHistories();
-            histories = db.LoadHistories();
-            UpdateTrayMenu();
+            string message = "All clipboard histories will be deleted!!!\nNote: Snippets will not be affected.\n\nAre you sure?";
+            string caption = "Delete Histories";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            var result = MessageBox.Show(this, message, caption, buttons, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+            if (result == DialogResult.Yes)
+            {
+                Clipboard.Clear();
+                var db = new DataProcess();
+                db.DeleteAllHistories();
+                histories = db.LoadHistories();
+                UpdateTrayMenu();
+            }
         }
 
         public MainForm()
@@ -194,7 +203,25 @@ namespace Clipy
 
         private void groupList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int selectedIndex = ((ListBox)sender).SelectedIndex;
+            if (selectedIndex == -1)
+            {
+                snippetsList.Items.Clear();
+                contentTextBox.Text = "";
+                return;
+            }
+            if (selectedIndex >= groups.Count) { return; }
+            ReloadSnippetsList(selectedIndex);
+        }
+
+        private void ReloadSnippetsList(int selectedGroupIndex)
+        {
+            var group = groups[selectedGroupIndex];
+            var db = new DataProcess();
+            currentSnippets = db.LoadSnippetsInGroup(group);
             snippetsList.Items.Clear(); // Clear snippetsList
+            contentTextBox.Text = ""; // Clear contentTextBox
+            editSnippetButton.Enabled = deleteSnippetButton.Enabled = false;
 
             var selectionCount = groupsList.SelectedIndices.Count;
             if (selectionCount == 1)
@@ -212,11 +239,6 @@ namespace Clipy
                 deleteGroupButton.Enabled = false;
                 renameGroupButton.Enabled = false;
             }
-            int selectedIndex = ((ListBox)sender).SelectedIndex;
-            if (selectedIndex >= groups.Count || selectedIndex < 0) { return; }
-            var group = groups[selectedIndex];
-            var db = new DataProcess();
-            currentSnippets = db.LoadSnippetsInGroup(group);
             currentSnippets.ForEach(s => {
                 var nameText = "(No Name)";
                 if (s.Name.Count() != 0) { nameText = s.Name; }
@@ -257,17 +279,6 @@ namespace Clipy
             });
         }
 
-        private void deleteGroupButton_Click(object sender, EventArgs e)
-        {
-            var indices = groupsList.SelectedIndices;
-            var db = new DataProcess();
-            foreach (int i in indices)
-            {
-                db.DeleteGroup(groups[i]);
-            }
-            ReloadGroupsUI();
-        }
-
         private void renameGroupButton_Click(object sender, EventArgs e)
         {
             var index = groupsList.SelectedIndex;
@@ -279,6 +290,7 @@ namespace Clipy
                 db.RenameGroup(group, input);
                 ReloadGroupsUI();
             }
+            groupsList.SelectedIndex = index;
         }
 
         private void historiesList_DoubleClick(object sender, EventArgs e)
@@ -318,17 +330,14 @@ namespace Clipy
             
             var contextMenu = new ContextMenu();
             organizeHistoriesMenu(contextMenu, histories, SubMenu_Click);
-
-            // Seperator
-            contextMenu.MenuItems.Add("-");
-
+            
             // Add groups
             if (groups == null) { groups = new DataProcess().LoadGroups(); }
-            
+            if (groups.Count > 0) { contextMenu.MenuItems.Add("-"); }
+
             groups.ForEach((g) => {
                 MenuItem m = new MenuItem(g.Name);
                 contextMenu.MenuItems.Add(m);
-                //TODO: Add sub menus here.
                 var historiesInGroup = db.LoadSnippetsInGroup(g);
                 if (historiesInGroup.Count() == 0)
                 {
@@ -338,7 +347,7 @@ namespace Clipy
                 {
                     m.Enabled = true;
                 }
-                if (historiesInGroup.Count() > 10) //FIXME: Magic
+                if (historiesInGroup.Count() > NUMBER_OF_ITEMS_PER_GROUP) //FIXME: Magic
                 {
                     organizeHistoriesMenu(m, historiesInGroup, Snippet_Click);
                 }
@@ -349,7 +358,7 @@ namespace Clipy
                         MenuItem subMenu = new MenuItem();
                         var history = historiesInGroup[i];
                         var content = history.Content.Trim();
-                        subMenu.Text = content.Substring(0, Math.Min(content.Count(), MAX_MENU_TITLE));
+                        subMenu.Text = shorttenedContent(content.FirstLine());
                         subMenu.Tag = history.Id;
                         subMenu.Click += Snippet_Click;
                         m.MenuItems.Add(subMenu);
@@ -369,6 +378,19 @@ namespace Clipy
             notifyIcon1.ContextMenu = contextMenu;
         }
 
+        private string shorttenedContent(string content)
+        {
+            var contentLength = content.Count();
+            if (contentLength > MAX_MENU_TITLE)
+            {
+                return content.Substring(0, MAX_MENU_TITLE) + "...";
+            }
+            else
+            {
+                return content;
+            }
+        }
+
         private void organizeHistoriesMenu(Menu parentMenu, List<History> histories, EventHandler menuEventHandler)
         {
             int totalItems = Math.Min(histories.Count, MAX_COUNT);
@@ -376,16 +398,16 @@ namespace Clipy
             MenuItem menu = new MenuItem(); // dummy 
             for (int i = 0; i < totalItems; i++)
             {
-                if (i % 10 == 0)
+                if (i % NUMBER_OF_ITEMS_PER_GROUP == 0)
                 {
                     menu = new MenuItem();
-                    menu.Text = string.Format("{0} - {1}", 1 + i, (i / 10 + 1) * 10);
+                    menu.Text = string.Format("{0} - {1}", 1 + i, (i / NUMBER_OF_ITEMS_PER_GROUP + 1) * NUMBER_OF_ITEMS_PER_GROUP);
                     parentMenu.MenuItems.Add(menu);
                 }
                 MenuItem subMenu = new MenuItem();
                 var history = histories[i];
                 var content = history.Content.Trim();
-                subMenu.Text = content.Substring(0, Math.Min(content.Count(), MAX_MENU_TITLE));
+                subMenu.Text = shorttenedContent(content.FirstLine());
                 // TODO: Tooltip? 
                 subMenu.Tag = history.Id;
                 subMenu.Click += menuEventHandler;
@@ -421,21 +443,107 @@ namespace Clipy
 
         private void addSnippetButton_Click(object sender, EventArgs e)
         {
+            var selectedGroupIndex = groupsList.SelectedIndex;
             var addForm = new AddSnippetForm();
             addForm.SelectedId = groupsList.SelectedIndex;
             addForm.ShowDialog();
             // Execute after dialog finished?
             ReloadGroupsUI();
             UpdateTrayMenu();
+            groupsList.SelectedIndex = selectedGroupIndex;
         }
 
         private void snippetsList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int selectionCount = snippetsList.SelectedIndices.Count;
+            editSnippetButton.Enabled = (selectionCount == 1);
+            deleteSnippetButton.Enabled = (selectionCount >= 1);
+
             contentTextBox.Text = "";
             int selectedIndex = snippetsList.SelectedIndex;
-            if (selectedIndex < 0 || selectedIndex >= currentSnippets.Count()) { return; }
-            var snippet = currentSnippets[selectedIndex];
-            contentTextBox.Text = snippet.Content;
+            if (selectionCount == 1)
+            {
+                if (selectedIndex < 0 || selectedIndex >= currentSnippets.Count()) { return; }
+                var snippet = currentSnippets[selectedIndex];
+                contentTextBox.Text = snippet.Content;
+            }
+            else if (selectionCount >= 1)
+            {
+                contentTextBox.Text = "(multiple snippets selected.)";
+            }
+        }
+
+        private void deleteGroupButton_Click(object sender, EventArgs e)
+        {
+            int index = groupsList.SelectedIndex;
+            var group = groups[index];
+
+            string message = "All the snippets in \"" + group.Name + "\" group will be deleted.\nAre you sure?";
+            string caption = "Delete " + group.Name;
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            var result = MessageBox.Show(this, message, caption, buttons, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+            if (result == DialogResult.Yes)
+            {
+                var db = new DataProcess();
+                db.DeleteGroup(group);
+                // Reload groups in main UI
+                ReloadGroupsUI();
+                // Clean up UI
+                snippetsList.Items.Clear();
+                contentTextBox.Text = "";
+                // Update tray menu
+                UpdateTrayMenu();
+            }
+        }
+
+        private void editSnippetButton_Click(object sender, EventArgs e)
+        {
+            int selectionCount = snippetsList.SelectedIndices.Count;
+            if (selectionCount != 1) { return; }
+            var snippet = currentSnippets[snippetsList.SelectedIndex];
+            
+            var selectedGroupIndex = groupsList.SelectedIndex;
+            var editForm = new AddSnippetForm(snippet);
+            editForm.SelectedId = selectedGroupIndex;
+            editForm.ShowDialog();
+            // Execute after dialog finished?
+            ReloadGroupsUI();
+            ReloadSnippetsList(selectedGroupIndex);
+            UpdateTrayMenu();
+            groupsList.SelectedIndex = selectedGroupIndex;
+        }
+
+        private void deleteSnippetButton_Click(object sender, EventArgs e)
+        {
+            string message = "Selected snippet(s) will be deleted.\nAre you sure?";
+            string caption = "Delete snippets";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            var result = MessageBox.Show(this, message, caption, buttons, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+            if (result == DialogResult.Yes)
+            {
+                var db = new DataProcess();
+                var selectedIndices = snippetsList.SelectedIndices;
+                for (int i = 0; i < selectedIndices.Count; ++i)
+                {
+                    int index = selectedIndices[i];
+                    db.DeleteHistory(currentSnippets[index]);
+                }
+                // Clean up UI
+                int selectedGroupIndex = groupsList.SelectedIndex;
+                ReloadSnippetsList(selectedGroupIndex);
+                contentTextBox.Text = "";
+                // Update tray menu
+                UpdateTrayMenu();
+            }
+        }
+
+        private void snippetsList_DoubleClick(object sender, EventArgs e)
+        {
+            var index = snippetsList.SelectedIndex;
+            var snippet = currentSnippets[index];
+            Clipboard.SetText(snippet.Content);
+            // FIXME: replace the messagebox with hud
+            MessageBox.Show("Copied!");
         }
     }
 }
