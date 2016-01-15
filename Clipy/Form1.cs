@@ -59,7 +59,7 @@ namespace Clipy
                 if (editMenu == null)
                 {
                     editMenu = new MenuItem();
-                    editMenu.Text = "Edit";
+                    editMenu.Text = "Snippets";
                     editMenu.Click += EditMenu_Click;
                 }
                 return editMenu;
@@ -368,10 +368,9 @@ namespace Clipy
 
             // Add more menus.
             contextMenu.MenuItems.Add("-");
-            contextMenu.MenuItems.Add(DeleteHistoriesMenu);
-            contextMenu.MenuItems.Add("-");
             contextMenu.MenuItems.Add(EditMenu);
             contextMenu.MenuItems.Add(SettingsMenu);
+            contextMenu.MenuItems.Add(DeleteHistoriesMenu);
             contextMenu.MenuItems.Add("-");
             contextMenu.MenuItems.Add(ExitMenu);
 
