@@ -4,7 +4,7 @@
 
 Clipboard history management app for Windows.
 
-Main features are basically usable. Settings pane and keyboard shortcut is not available yet. 
+Main features are basically usable. Settings pane and keyboard shortcuts are not available yet. 
 
 ![Screenshot](screenshot.png)
 
