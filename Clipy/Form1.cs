@@ -397,16 +397,24 @@ namespace Clipy
             MenuItem menu = new MenuItem(); // dummy 
             for (int i = 0; i < totalItems; i++)
             {
-                if (i % NUMBER_OF_ITEMS_PER_GROUP == 0)
+                int remainent = i % NUMBER_OF_ITEMS_PER_GROUP;
+                if (remainent == 0)
                 {
+                    int delta = NUMBER_OF_ITEMS_PER_GROUP;
+                    if ((totalItems - i) < NUMBER_OF_ITEMS_PER_GROUP)
+                    {
+                        delta = (totalItems - i);
+                    }
                     menu = new MenuItem();
-                    menu.Text = string.Format("{0} - {1}", 1 + i, (i / NUMBER_OF_ITEMS_PER_GROUP + 1) * NUMBER_OF_ITEMS_PER_GROUP);
+                    int upperLimit = (i / NUMBER_OF_ITEMS_PER_GROUP) * NUMBER_OF_ITEMS_PER_GROUP + delta;
+                    
+                    menu.Text = string.Format("{0} - {1}", 1 + i, upperLimit);
                     parentMenu.MenuItems.Add(menu);
                 }
                 MenuItem subMenu = new MenuItem();
                 var history = histories[i];
                 var content = history.Content.Trim();
-                subMenu.Text = shorttenedContent(content.FirstLine());
+                subMenu.Text = string.Format("{0}. {1}", remainent + 1, shorttenedContent(content.FirstLine()));
                 // TODO: Tooltip? 
                 subMenu.Tag = history.Id;
                 subMenu.Click += menuEventHandler;
