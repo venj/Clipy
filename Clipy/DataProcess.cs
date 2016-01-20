@@ -6,16 +6,23 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
+using System.Diagnostics;
 
 namespace Clipy
 {
     class DataProcess
     {
-        //private SQLiteConnection conn;
-        public static string DBPATH = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "data.db");
-        private string DataSource {
+        public static string DataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Process.GetCurrentProcess().ProcessName);
+        public static string DBPATH = Path.Combine(DataDirectory, "data.db");
+
+        private string DataSource
+        {
             get
-            { 
+            {
+                if (!Directory.Exists(DataDirectory))
+                {
+                    Directory.CreateDirectory(DataDirectory);
+                }
                 return "Data Source=" + DBPATH;
             }
         }
