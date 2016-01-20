@@ -12,13 +12,13 @@ Main features are basically usable. Settings pane and keyboard shortcuts are not
 
 ### Using binary release:
 
-1. Download "[Clipy-1.0.0-release.zip](https://github.com/venj/Clipy/releases/download/1.0.0/Clipy-1.0.0-release.zip)" from [releases](https://github.com/venj/Clipy/releases) page. Unzip and install the app.
+1. Download "[Clipy_1.0.1-release.zip](https://github.com/venj/Clipy/releases/download/1.0.1/Clipy_1.0.1-release.zip)" from [releases](https://github.com/venj/Clipy/releases) page. Unzip and install the app.
 
 2. Enjoy and file bugs.
 
 ### From source code:
 
-Clone this project and build with Visual Studio 2015. 
+Clone this project and build with Visual Studio Community 2015. 
 
 ## Demo
 
@@ -27,3 +27,7 @@ Clone this project and build with Visual Studio 2015.
 ## License
 
 [MIT License](LICENSE)
+
+## Acknowlodgement
+
+Inspired by [Clipy for OS X](https://github.com/Clipy/Clipy). 
