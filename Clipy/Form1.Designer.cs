@@ -80,15 +80,16 @@
             // horizontalSplitter.Panel2
             // 
             this.horizontalSplitter.Panel2.Controls.Add(this.verticalSplitter);
-            this.horizontalSplitter.Size = new System.Drawing.Size(595, 264);
-            this.horizontalSplitter.SplitterDistance = 198;
+            this.horizontalSplitter.Size = new System.Drawing.Size(584, 300);
+            this.horizontalSplitter.SplitterDistance = 194;
             this.horizontalSplitter.TabIndex = 6;
             // 
             // renameGroupButton
             // 
             this.renameGroupButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.renameGroupButton.Enabled = false;
-            this.renameGroupButton.Location = new System.Drawing.Point(3, 238);
+            this.renameGroupButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.renameGroupButton.Location = new System.Drawing.Point(3, 274);
             this.renameGroupButton.Name = "renameGroupButton";
             this.renameGroupButton.Size = new System.Drawing.Size(64, 23);
             this.renameGroupButton.TabIndex = 13;
@@ -100,7 +101,8 @@
             // 
             this.deleteGroupButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.deleteGroupButton.Enabled = false;
-            this.deleteGroupButton.Location = new System.Drawing.Point(73, 238);
+            this.deleteGroupButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.deleteGroupButton.Location = new System.Drawing.Point(73, 274);
             this.deleteGroupButton.Name = "deleteGroupButton";
             this.deleteGroupButton.Size = new System.Drawing.Size(66, 23);
             this.deleteGroupButton.TabIndex = 12;
@@ -112,15 +114,17 @@
             // 
             this.groupNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupNameTextBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupNameTextBox.Location = new System.Drawing.Point(3, 3);
             this.groupNameTextBox.Name = "groupNameTextBox";
-            this.groupNameTextBox.Size = new System.Drawing.Size(162, 21);
+            this.groupNameTextBox.Size = new System.Drawing.Size(158, 23);
             this.groupNameTextBox.TabIndex = 11;
             // 
             // addGroupButton
             // 
             this.addGroupButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addGroupButton.Location = new System.Drawing.Point(171, 2);
+            this.addGroupButton.Font = new System.Drawing.Font("Segoe UI Symbol", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addGroupButton.Location = new System.Drawing.Point(167, 2);
             this.addGroupButton.Name = "addGroupButton";
             this.addGroupButton.Size = new System.Drawing.Size(23, 23);
             this.addGroupButton.TabIndex = 10;
@@ -133,11 +137,12 @@
             this.groupsList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupsList.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupsList.FormattingEnabled = true;
-            this.groupsList.ItemHeight = 12;
+            this.groupsList.ItemHeight = 17;
             this.groupsList.Location = new System.Drawing.Point(3, 30);
             this.groupsList.Name = "groupsList";
-            this.groupsList.Size = new System.Drawing.Size(191, 196);
+            this.groupsList.Size = new System.Drawing.Size(187, 242);
             this.groupsList.TabIndex = 9;
             this.groupsList.SelectedIndexChanged += new System.EventHandler(this.groupList_SelectedIndexChanged);
             // 
@@ -155,21 +160,20 @@
             // verticalSplitter.Panel2
             // 
             this.verticalSplitter.Panel2.Controls.Add(this.contentTextBox);
-            this.verticalSplitter.Size = new System.Drawing.Size(393, 264);
-            this.verticalSplitter.SplitterDistance = 94;
+            this.verticalSplitter.Size = new System.Drawing.Size(386, 300);
+            this.verticalSplitter.SplitterDistance = 106;
             this.verticalSplitter.TabIndex = 0;
             // 
             // snippetsList
             // 
-            this.snippetsList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.snippetsList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.snippetsList.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.snippetsList.FormattingEnabled = true;
-            this.snippetsList.ItemHeight = 12;
+            this.snippetsList.ItemHeight = 17;
             this.snippetsList.Location = new System.Drawing.Point(0, 0);
             this.snippetsList.Name = "snippetsList";
             this.snippetsList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.snippetsList.Size = new System.Drawing.Size(393, 88);
+            this.snippetsList.Size = new System.Drawing.Size(386, 106);
             this.snippetsList.TabIndex = 8;
             this.snippetsList.SelectedIndexChanged += new System.EventHandler(this.snippetsList_SelectedIndexChanged);
             this.snippetsList.DoubleClick += new System.EventHandler(this.snippetsList_DoubleClick);
@@ -179,17 +183,19 @@
             this.contentTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.contentTextBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.contentTextBox.Location = new System.Drawing.Point(0, 2);
             this.contentTextBox.Multiline = true;
             this.contentTextBox.Name = "contentTextBox";
             this.contentTextBox.ReadOnly = true;
             this.contentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.contentTextBox.Size = new System.Drawing.Size(393, 161);
+            this.contentTextBox.Size = new System.Drawing.Size(386, 185);
             this.contentTextBox.TabIndex = 10;
             // 
             // deleteSnippetButton
             // 
             this.deleteSnippetButton.Enabled = false;
+            this.deleteSnippetButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.deleteSnippetButton.Image = ((System.Drawing.Image)(resources.GetObject("deleteSnippetButton.Image")));
             this.deleteSnippetButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.deleteSnippetButton.Location = new System.Drawing.Point(146, 12);
@@ -204,6 +210,7 @@
             // editSnippetButton
             // 
             this.editSnippetButton.Enabled = false;
+            this.editSnippetButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.editSnippetButton.Image = ((System.Drawing.Image)(resources.GetObject("editSnippetButton.Image")));
             this.editSnippetButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.editSnippetButton.Location = new System.Drawing.Point(81, 12);
@@ -217,6 +224,7 @@
             // 
             // addSnippetButton
             // 
+            this.addSnippetButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.addSnippetButton.Image = global::Clipy.Properties.Resources.add_small;
             this.addSnippetButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.addSnippetButton.Location = new System.Drawing.Point(15, 12);
@@ -232,7 +240,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 354);
+            this.ClientSize = new System.Drawing.Size(608, 390);
             this.Controls.Add(this.editSnippetButton);
             this.Controls.Add(this.deleteSnippetButton);
             this.Controls.Add(this.addSnippetButton);

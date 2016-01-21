@@ -36,9 +36,9 @@ namespace Clipy
                     conn.Open();
                     using (SQLiteCommand command = new SQLiteCommand(conn))
                     {
-                        command.CommandText = "CREATE TABLE Groups(id integer NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, name string NOT NULL)";
+                        command.CommandText = "CREATE TABLE Groups(id integer NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, name string UNIQUE NOT NULL)";
                         command.ExecuteNonQuery();
-                        command.CommandText = "CREATE TABLE Histories(id integer NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, name string UNIQUE, content text, obj data, group_id integer, created_at timestamp)";
+                        command.CommandText = "CREATE TABLE Histories(id integer NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, name string, content text, obj data, group_id integer, created_at timestamp)";
                         command.ExecuteNonQuery();
                     }
                 }
