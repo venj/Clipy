@@ -547,6 +547,7 @@ namespace Clipy
         private void snippetsList_DoubleClick(object sender, EventArgs e)
         {
             var index = snippetsList.SelectedIndex;
+            if (index == -1 || index >= groups.Count) { return; }
             var snippet = currentSnippets[index];
             Clipboard.SetText(snippet.Content);
             // FIXME: replace the messagebox with hud
@@ -554,4 +555,3 @@ namespace Clipy
         }
     }
 }
-
