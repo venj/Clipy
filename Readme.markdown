@@ -12,7 +12,7 @@ Main features are basically usable. Settings pane and keyboard shortcuts are not
 
 ### Using binary release:
 
-1. Download "[Clipy_1.0.2-release.zip](https://github.com/venj/Clipy/releases/download/1.0.2/Clipy_1.0.2-release.zip)" from [releases](https://github.com/venj/Clipy/releases) page. Unzip and install the app.
+1. Download "[Clipy_1.0.3-release.zip](https://github.com/venj/Clipy/releases/download/1.0.3/Clipy_1.0.3-release.zip)" from [releases](https://github.com/venj/Clipy/releases) page. Unzip and install the app.
 
 2. Enjoy and file bugs.
 
