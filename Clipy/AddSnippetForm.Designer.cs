@@ -66,14 +66,14 @@
             this.snippetContentBox.Multiline = true;
             this.snippetContentBox.Name = "snippetContentBox";
             this.snippetContentBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.snippetContentBox.Size = new System.Drawing.Size(381, 198);
+            this.snippetContentBox.Size = new System.Drawing.Size(440, 204);
             this.snippetContentBox.TabIndex = 2;
             // 
             // addSnippetButton
             // 
             this.addSnippetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.addSnippetButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.addSnippetButton.Location = new System.Drawing.Point(237, 240);
+            this.addSnippetButton.Location = new System.Drawing.Point(296, 246);
             this.addSnippetButton.Name = "addSnippetButton";
             this.addSnippetButton.Size = new System.Drawing.Size(75, 23);
             this.addSnippetButton.TabIndex = 3;
@@ -85,7 +85,7 @@
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cancelButton.Location = new System.Drawing.Point(318, 240);
+            this.cancelButton.Location = new System.Drawing.Point(377, 246);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 4;
@@ -115,7 +115,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(405, 275);
+            this.ClientSize = new System.Drawing.Size(464, 281);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.cancelButton);
@@ -126,6 +126,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddSnippetForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Add Snippet";
             this.Load += new System.EventHandler(this.AddSnippetForm_Load);
             this.ResumeLayout(false);

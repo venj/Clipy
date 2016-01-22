@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Drawing;
 
 namespace Clipy
 {
@@ -138,7 +139,7 @@ namespace Clipy
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            ParseFontFromSettings();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -552,6 +553,14 @@ namespace Clipy
             Clipboard.SetText(snippet.Content);
             // FIXME: replace the messagebox with hud
             MessageBox.Show("Copied!");
+        }
+
+        private Font ParseFontFromSettings()
+        {
+            var dialog = new FontDialog();
+            dialog.AllowVerticalFonts = false;
+            dialog.ShowDialog();
+            return new Font("Simsun", 9.5f);
         }
     }
 }
