@@ -48,6 +48,7 @@ namespace Clipy
             FillComboBox();
             groupListCombo.SelectedIndex = SelectedId;
             nameTextBox.Focus();
+            snippetContentBox.Font = fetchMonoFont();
             if (_currentHistory != null)
             {
                 nameTextBox.Text = _currentHistory.Name;
@@ -58,6 +59,15 @@ namespace Clipy
             {
                 Text = "Add snippet";
             }
+        }
+        
+        private Font fetchMonoFont()
+        {
+            string fontName = Properties.Settings.Default.monoFontName;
+            float fontSize = Properties.Settings.Default.monoFontSize;
+            FontStyle fontStyle = (FontStyle)Enum.Parse(typeof(FontStyle), Properties.Settings.Default.monoFontStyle);
+            var UIFont = new Font(fontName, fontSize, fontStyle);
+            return UIFont;
         }
 
         private void addSnippetButton_Click(object sender, EventArgs e)

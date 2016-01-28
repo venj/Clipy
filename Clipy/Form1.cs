@@ -19,11 +19,10 @@ namespace Clipy
         // Bring window to front while not in focus.
         [DllImport("User32.dll")]
         public static extern Int32 SetForegroundWindow(int hWnd);
-
-        //TODO: Should go to settings later.
-        private int MAX_COUNT = 50;
-        private int MAX_MENU_TITLE = 20;
-        private int NUMBER_OF_ITEMS_PER_GROUP = 10;
+        
+        private int MAX_COUNT = Properties.Settings.Default.numberOfHistories;
+        private int MAX_MENU_TITLE = Properties.Settings.Default.menuLength;
+        private int NUMBER_OF_ITEMS_PER_GROUP = Properties.Settings.Default.itemsPerGroup;
 
         // Local variable
         IntPtr nextClipboardViewer;
@@ -49,7 +48,10 @@ namespace Clipy
 
         private void SettingsMenu_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Settings window here.");
+            SettingsPane settingsPane = new SettingsPane();
+            settingsPane.ShowDialog();
+            // Deal with the result;
+            // Reload UI;
         }
 
         private MenuItem editMenu;
@@ -139,7 +141,28 @@ namespace Clipy
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ParseFontFromSettings();
+            updateUIFromSettings();
+        }
+        
+        private void updateUIFromSettings()
+        {
+            contentTextBox.Font = fetchMonoFont();
+        }
+
+        private Font fetchMonoFont()
+        {
+            string fontName = Properties.Settings.Default.monoFontName;
+            float fontSize = Properties.Settings.Default.monoFontSize;
+            FontStyle fontStyle = (FontStyle)Enum.Parse(typeof(FontStyle), Properties.Settings.Default.monoFontStyle);
+            var UIFont = new Font(fontName, fontSize, fontStyle);
+            return UIFont;
+        }
+
+        private void reloadSettings()
+        {
+            MAX_COUNT = Properties.Settings.Default.numberOfHistories;
+            MAX_MENU_TITLE = Properties.Settings.Default.menuLength;
+            NUMBER_OF_ITEMS_PER_GROUP = Properties.Settings.Default.itemsPerGroup;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -326,6 +349,7 @@ namespace Clipy
 
         private void UpdateTrayMenu()
         {
+            reloadSettings();
             var db = new DataProcess();
             histories = db.LoadHistories();
             
@@ -553,14 +577,6 @@ namespace Clipy
             Clipboard.SetText(snippet.Content);
             // FIXME: replace the messagebox with hud
             MessageBox.Show("Copied!");
-        }
-
-        private Font ParseFontFromSettings()
-        {
-            var dialog = new FontDialog();
-            dialog.AllowVerticalFonts = false;
-            dialog.ShowDialog();
-            return new Font("Simsun", 9.5f);
         }
     }
 }

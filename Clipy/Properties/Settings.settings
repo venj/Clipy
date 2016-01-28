@@ -2,14 +2,26 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Clipy.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="monoFont" Type="System.String" Scope="User">
+    <Setting Name="monoFontName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Consolas</Value>
     </Setting>
     <Setting Name="monoFontSize" Type="System.Single" Scope="User">
       <Value Profile="(Default)">9.5</Value>
     </Setting>
     <Setting Name="monoFontStyle" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Normal</Value>
+      <Value Profile="(Default)">Regular</Value>
+    </Setting>
+    <Setting Name="numberOfHistories" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="menuLength" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="itemsPerGroup" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="startAtLogin" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>
