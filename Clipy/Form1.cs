@@ -50,10 +50,16 @@ namespace Clipy
         {
             SettingsPane settingsPane = new SettingsPane();
             settingsPane.ShowDialog();
-            // Deal with the result;
-            // Reload UI;
+            // Delay 0.1s to allow settings to sync.
+            Timer timer = new Timer();
+            timer.Interval = 100;
+            timer.Tick += (obj, eventArgs) => {
+                timer.Stop();
+                UpdateTrayMenu();
+                UpdateUIFromSettings();
+            };
+            timer.Start();
         }
-
         private MenuItem editMenu;
         private MenuItem EditMenu
         {
@@ -141,10 +147,10 @@ namespace Clipy
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            updateUIFromSettings();
+            UpdateUIFromSettings();
         }
         
-        private void updateUIFromSettings()
+        private void UpdateUIFromSettings()
         {
             contentTextBox.Font = fetchMonoFont();
         }

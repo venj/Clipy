@@ -40,7 +40,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.numberOfHistoriesStepper = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.applyButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
@@ -225,21 +224,10 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Number of Histories (20-200)";
             // 
-            // applyButton
-            // 
-            this.applyButton.Enabled = false;
-            this.applyButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.applyButton.Location = new System.Drawing.Point(406, 283);
-            this.applyButton.Name = "applyButton";
-            this.applyButton.Size = new System.Drawing.Size(75, 23);
-            this.applyButton.TabIndex = 2;
-            this.applyButton.Text = "Apply";
-            this.applyButton.UseVisualStyleBackColor = true;
-            // 
             // saveButton
             // 
             this.saveButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.saveButton.Location = new System.Drawing.Point(325, 283);
+            this.saveButton.Location = new System.Drawing.Point(406, 283);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 3;
@@ -256,6 +244,7 @@
             this.cancelButton.TabIndex = 4;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // resetButton
             // 
@@ -276,7 +265,6 @@
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.applyButton);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
@@ -303,7 +291,6 @@
         private System.Windows.Forms.Button changeCodeFontButton;
         private System.Windows.Forms.TextBox fontNameTextBox;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button applyButton;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.NumericUpDown numberOfHistoriesStepper;

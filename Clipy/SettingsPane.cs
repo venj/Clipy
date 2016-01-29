@@ -154,5 +154,10 @@ namespace Clipy
             // Right now, do nothing...
             Close();
         }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
