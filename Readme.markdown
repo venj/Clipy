@@ -2,6 +2,8 @@
 
 ![Icon](icon.png)
 
+**Clipy 1.1.0已加入中文界面。**
+
 Clipboard history management app for Windows.
 
 Main features are basically usable. Settings pane and keyboard shortcuts are not available yet. 
