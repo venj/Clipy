@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
+using System.Reflection;
+using System.Resources;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Clipy
 {
     public partial class SettingsPane : Form
     {
+        // For localization.
+        private ResourceManager resmgr = new ResourceManager("Clipy.Strings", Assembly.GetExecutingAssembly());
+        private CultureInfo ci = Thread.CurrentThread.CurrentUICulture;
+
         private Dictionary<string, Object> defaultSettings;
         private Dictionary<string, Object> DefaultSettings
         {
@@ -132,7 +134,7 @@ namespace Clipy
         
         private void resetButton_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Reset all settings to default values?", "Reset to default", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show(resmgr.GetString("__message_box_message_Reset_all", ci), resmgr.GetString("__message_box_title_Reset_all", ci), MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 // The logic here is a bit strange, if you press yes, the settings will revert to default immediately.
                 resetToDefaultSettings();
@@ -145,11 +147,11 @@ namespace Clipy
         {
             if (saveCurrentSettings())
             {
-                MessageBox.Show("Saved");
+                MessageBox.Show(resmgr.GetString("__message_box_message_saved", ci));
             }
             else
             {
-                MessageBox.Show("Error saving settings.");
+                MessageBox.Show(resmgr.GetString("__message_box_message_save_error", ci));
             }
             // Right now, do nothing...
             Close();

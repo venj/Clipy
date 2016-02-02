@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
+using System.Reflection;
+using System.Resources;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Clipy
@@ -14,6 +13,10 @@ namespace Clipy
     {
         public int SelectedId { get; set; }
         private History _currentHistory;
+
+        // For localization.
+        private ResourceManager resmgr = new ResourceManager("Clipy.Strings", Assembly.GetExecutingAssembly());
+        private CultureInfo ci = Thread.CurrentThread.CurrentUICulture;
 
         private List<Group> groups;
         public AddSnippetForm()
@@ -53,11 +56,11 @@ namespace Clipy
             {
                 nameTextBox.Text = _currentHistory.Name;
                 snippetContentBox.Text = _currentHistory.Content;
-                Text = "Edit snippet";
+                Text = resmgr.GetString("__message_box_message_edit_snippet", ci);
             }
             else
             {
-                Text = "Add snippet";
+                Text = resmgr.GetString("__message_box_message_add_snippet", ci);
             }
         }
         
@@ -74,13 +77,13 @@ namespace Clipy
         {
             if (snippetContentBox.Text.Trim() == "")
             {
-                MessageBox.Show("Snippet can not be empty.");
+                MessageBox.Show(resmgr.GetString("__message_box_message_snippet_cannot_empty", ci));
                 return;
             }
 
             if (groupListCombo.Text.Trim() == "")
             {
-                MessageBox.Show("Group can not be empty.");
+                MessageBox.Show(resmgr.GetString("__message_box_message_group_cannot_empty", ci));
                 return;
             }
 

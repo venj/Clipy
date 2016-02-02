@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
 using System.Drawing;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
+using System.Resources;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace Clipy
 {
@@ -24,6 +28,10 @@ namespace Clipy
         private int MAX_MENU_TITLE = Properties.Settings.Default.menuLength;
         private int NUMBER_OF_ITEMS_PER_GROUP = Properties.Settings.Default.itemsPerGroup;
 
+        // For localization.
+        private ResourceManager resmgr = new ResourceManager("Clipy.Strings", Assembly.GetExecutingAssembly());
+        private CultureInfo ci = Thread.CurrentThread.CurrentUICulture;
+
         // Local variable
         IntPtr nextClipboardViewer;
         List<Group> groups;
@@ -39,7 +47,7 @@ namespace Clipy
                 if (settingsMenu == null)
                 {
                     settingsMenu = new MenuItem();
-                    settingsMenu.Text = "Settings";
+                    settingsMenu.Text = resmgr.GetString("__menu_title_Settings", ci);
                     settingsMenu.Click += SettingsMenu_Click;
                 }
                 return settingsMenu;
@@ -51,7 +59,7 @@ namespace Clipy
             SettingsPane settingsPane = new SettingsPane();
             settingsPane.ShowDialog();
             // Delay 0.1s to allow settings to sync.
-            Timer timer = new Timer();
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
             timer.Interval = 100;
             timer.Tick += (obj, eventArgs) => {
                 timer.Stop();
@@ -68,7 +76,7 @@ namespace Clipy
                 if (editMenu == null)
                 {
                     editMenu = new MenuItem();
-                    editMenu.Text = "Snippets";
+                    editMenu.Text = resmgr.GetString("__menu_title_Snippets", ci);
                     editMenu.Click += EditMenu_Click;
                 }
                 return editMenu;
@@ -88,7 +96,7 @@ namespace Clipy
                 if (exitMenu == null)
                 {
                     exitMenu = new MenuItem();
-                    exitMenu.Text = "Exit";
+                    exitMenu.Text = resmgr.GetString("__menu_title_Exit", ci);
                     exitMenu.Click += ExitMenu_Click;
                 }
                 return exitMenu;
@@ -108,7 +116,7 @@ namespace Clipy
                 if (deleteHistoriesMenu == null)
                 {
                     deleteHistoriesMenu = new MenuItem();
-                    deleteHistoriesMenu.Text = "Delete Histories";
+                    deleteHistoriesMenu.Text = resmgr.GetString("__menu_title_Delete_Histories", ci);
                     deleteHistoriesMenu.Click += DeleteHistoriesMenu_Click; ;
                 }
                 return deleteHistoriesMenu;
@@ -117,8 +125,8 @@ namespace Clipy
 
         private void DeleteHistoriesMenu_Click(object sender, EventArgs e)
         {
-            string message = "All clipboard histories will be deleted!!!\nNote: Snippets will not be affected.\n\nAre you sure?";
-            string caption = "Delete Histories";
+            string message = resmgr.GetString("__message_box_Warn_Delete_Histories", ci);
+            string caption = resmgr.GetString("__menu_title_Delete_Histories", ci);
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             var result = MessageBox.Show(this, message, caption, buttons, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
             if (result == DialogResult.Yes)
@@ -270,7 +278,7 @@ namespace Clipy
                 renameGroupButton.Enabled = false;
             }
             currentSnippets.ForEach(s => {
-                var nameText = "(No Name)";
+                var nameText = resmgr.GetString("__window_content_No_Name", ci);
                 if (s.Name.Count() != 0) { nameText = s.Name; }
                 snippetsList.Items.Add(nameText);
             });
@@ -281,7 +289,7 @@ namespace Clipy
             var name = groupNameTextBox.Text.Trim();
             if (name.Length == 0)
             {
-                MessageBox.Show("Group name can not be empty!");
+                MessageBox.Show(resmgr.GetString("__message_box_Group_name_not_empty", ci));
             }
             else
             {
@@ -313,7 +321,7 @@ namespace Clipy
         {
             var index = groupsList.SelectedIndex;
             var group = groups[index];
-            string input = Microsoft.VisualBasic.Interaction.InputBox("Rename group", "Rename", group.Name).Trim();
+            string input = Microsoft.VisualBasic.Interaction.InputBox(resmgr.GetString("__message_box_message_Remane_group", ci), resmgr.GetString("__message_box_title_Remane", ci), group.Name).Trim();
             if (input != "")
             {
                 var db = new DataProcess();
@@ -507,7 +515,7 @@ namespace Clipy
             }
             else if (selectionCount >= 1)
             {
-                contentTextBox.Text = "(multiple snippets selected.)";
+                contentTextBox.Text = resmgr.GetString("__window_content_multiple_snippests_selected", ci);
             }
         }
 
@@ -516,8 +524,8 @@ namespace Clipy
             int index = groupsList.SelectedIndex;
             var group = groups[index];
 
-            string message = "All the snippets in \"" + group.Name + "\" group will be deleted.\nAre you sure?";
-            string caption = "Delete " + group.Name;
+            string message = resmgr.GetString("__message_box_message_delete_group_part_1", ci) + group.Name + resmgr.GetString("__message_box_message_delete_group_part_2", ci); //"All the snippets in \"" + group.Name + "\" group will be deleted.\nAre you sure?";
+            string caption = resmgr.GetString("__message_box_title_delete_group_part_1", ci) + group.Name;
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             var result = MessageBox.Show(this, message, caption, buttons, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
             if (result == DialogResult.Yes)
@@ -553,8 +561,8 @@ namespace Clipy
 
         private void deleteSnippetButton_Click(object sender, EventArgs e)
         {
-            string message = "Selected snippet(s) will be deleted.\nAre you sure?";
-            string caption = "Delete snippets";
+            string message = resmgr.GetString("__message_box_message_delete_snippets", ci);
+            string caption = resmgr.GetString("__message_box_title_delete_snippets", ci);
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             var result = MessageBox.Show(this, message, caption, buttons, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
             if (result == DialogResult.Yes)
@@ -582,7 +590,7 @@ namespace Clipy
             var snippet = currentSnippets[index];
             Clipboard.SetText(snippet.Content);
             // FIXME: replace the messagebox with hud
-            MessageBox.Show("Copied!");
+            MessageBox.Show(resmgr.GetString("__message_box_message_copied", ci));
         }
     }
 }

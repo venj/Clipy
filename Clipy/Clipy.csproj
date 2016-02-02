@@ -25,8 +25,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>20</ApplicationRevision>
-    <ApplicationVersion>1.0.4.20</ApplicationVersion>
+    <ApplicationRevision>22</ApplicationRevision>
+    <ApplicationVersion>1.1.0.22</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -137,6 +137,11 @@
       <DependentUpon>SettingsPane.cs</DependentUpon>
     </Compile>
     <Compile Include="StringExtension.cs" />
+    <Compile Include="Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddSnippetForm.resx">
       <DependentUpon>AddSnippetForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -165,6 +170,11 @@
     <EmbeddedResource Include="SettingsPane.zh.resx">
       <DependentUpon>SettingsPane.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings.zh-CN.resx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
