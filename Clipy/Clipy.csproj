@@ -140,7 +140,13 @@
     <EmbeddedResource Include="AddSnippetForm.resx">
       <DependentUpon>AddSnippetForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddSnippetForm.zh.resx">
+      <DependentUpon>AddSnippetForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.zh.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -154,6 +160,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SettingsPane.resx">
+      <DependentUpon>SettingsPane.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsPane.zh.resx">
       <DependentUpon>SettingsPane.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

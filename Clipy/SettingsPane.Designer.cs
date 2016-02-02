@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsPane));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.changeCodeFontButton = new System.Windows.Forms.Button();
@@ -55,43 +56,27 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.changeCodeFontButton);
             this.groupBox1.Controls.Add(this.fontNameTextBox);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(13, 13);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(272, 264);
-            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Fonts";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(6, 25);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Code Font";
             // 
             // changeCodeFontButton
             // 
-            this.changeCodeFontButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.changeCodeFontButton.Location = new System.Drawing.Point(190, 51);
+            resources.ApplyResources(this.changeCodeFontButton, "changeCodeFontButton");
             this.changeCodeFontButton.Name = "changeCodeFontButton";
-            this.changeCodeFontButton.Size = new System.Drawing.Size(76, 23);
-            this.changeCodeFontButton.TabIndex = 1;
-            this.changeCodeFontButton.Text = "Change";
             this.changeCodeFontButton.UseVisualStyleBackColor = true;
             this.changeCodeFontButton.Click += new System.EventHandler(this.changeCodeFontButton_Click);
             // 
             // fontNameTextBox
             // 
-            this.fontNameTextBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.fontNameTextBox.Location = new System.Drawing.Point(80, 22);
+            resources.ApplyResources(this.fontNameTextBox, "fontNameTextBox");
             this.fontNameTextBox.Name = "fontNameTextBox";
             this.fontNameTextBox.ReadOnly = true;
-            this.fontNameTextBox.Size = new System.Drawing.Size(186, 23);
-            this.fontNameTextBox.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -102,23 +87,14 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.numberOfHistoriesStepper);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.Location = new System.Drawing.Point(292, 13);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(270, 264);
-            this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Misc";
             // 
             // startupAtLoginCheckBox
             // 
-            this.startupAtLoginCheckBox.AutoSize = true;
-            this.startupAtLoginCheckBox.Enabled = false;
-            this.startupAtLoginCheckBox.Location = new System.Drawing.Point(9, 114);
+            resources.ApplyResources(this.startupAtLoginCheckBox, "startupAtLoginCheckBox");
             this.startupAtLoginCheckBox.Name = "startupAtLoginCheckBox";
-            this.startupAtLoginCheckBox.Size = new System.Drawing.Size(169, 21);
-            this.startupAtLoginCheckBox.TabIndex = 6;
-            this.startupAtLoginCheckBox.Text = "Start up when user login";
             this.startupAtLoginCheckBox.UseVisualStyleBackColor = true;
             // 
             // itemPerGroupStepper
@@ -128,7 +104,7 @@
             0,
             0,
             0});
-            this.itemPerGroupStepper.Location = new System.Drawing.Point(195, 81);
+            resources.ApplyResources(this.itemPerGroupStepper, "itemPerGroupStepper");
             this.itemPerGroupStepper.Maximum = new decimal(new int[] {
             30,
             0,
@@ -140,8 +116,6 @@
             0,
             0});
             this.itemPerGroupStepper.Name = "itemPerGroupStepper";
-            this.itemPerGroupStepper.Size = new System.Drawing.Size(69, 23);
-            this.itemPerGroupStepper.TabIndex = 5;
             this.itemPerGroupStepper.Value = new decimal(new int[] {
             10,
             0,
@@ -150,16 +124,12 @@
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 85);
+            resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(142, 17);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Items Per Group (5-30)";
             // 
             // menuLengthStepper
             // 
-            this.menuLengthStepper.Location = new System.Drawing.Point(195, 52);
+            resources.ApplyResources(this.menuLengthStepper, "menuLengthStepper");
             this.menuLengthStepper.Maximum = new decimal(new int[] {
             30,
             0,
@@ -171,8 +141,6 @@
             0,
             0});
             this.menuLengthStepper.Name = "menuLengthStepper";
-            this.menuLengthStepper.Size = new System.Drawing.Size(69, 23);
-            this.menuLengthStepper.TabIndex = 3;
             this.menuLengthStepper.Value = new decimal(new int[] {
             20,
             0,
@@ -181,12 +149,8 @@
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 54);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(129, 17);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Menu Length (10-30)";
             // 
             // numberOfHistoriesStepper
             // 
@@ -195,7 +159,7 @@
             0,
             0,
             0});
-            this.numberOfHistoriesStepper.Location = new System.Drawing.Point(195, 23);
+            resources.ApplyResources(this.numberOfHistoriesStepper, "numberOfHistoriesStepper");
             this.numberOfHistoriesStepper.Maximum = new decimal(new int[] {
             200,
             0,
@@ -207,8 +171,6 @@
             0,
             0});
             this.numberOfHistoriesStepper.Name = "numberOfHistoriesStepper";
-            this.numberOfHistoriesStepper.Size = new System.Drawing.Size(69, 23);
-            this.numberOfHistoriesStepper.TabIndex = 1;
             this.numberOfHistoriesStepper.Value = new decimal(new int[] {
             50,
             0,
@@ -217,51 +179,34 @@
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 25);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(179, 17);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Number of Histories (20-200)";
             // 
             // saveButton
             // 
-            this.saveButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.saveButton.Location = new System.Drawing.Point(406, 283);
+            resources.ApplyResources(this.saveButton, "saveButton");
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 3;
-            this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // cancelButton
             // 
-            this.cancelButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cancelButton.Location = new System.Drawing.Point(487, 283);
+            resources.ApplyResources(this.cancelButton, "cancelButton");
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 4;
-            this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // resetButton
             // 
-            this.resetButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.resetButton.Location = new System.Drawing.Point(13, 283);
+            resources.ApplyResources(this.resetButton, "resetButton");
             this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(75, 23);
-            this.resetButton.TabIndex = 5;
-            this.resetButton.Text = "Reset";
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
             // SettingsPane
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(574, 318);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
@@ -272,7 +217,6 @@
             this.Name = "SettingsPane";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "SettingsPane";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

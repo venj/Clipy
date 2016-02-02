@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddSnippetForm));
             this.groupListCombo = new System.Windows.Forms.ComboBox();
             this.groupLabel = new System.Windows.Forms.Label();
             this.snippetContentBox = new System.Windows.Forms.TextBox();
@@ -39,83 +40,48 @@
             // 
             // groupListCombo
             // 
-            this.groupListCombo.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            resources.ApplyResources(this.groupListCombo, "groupListCombo");
             this.groupListCombo.FormattingEnabled = true;
-            this.groupListCombo.Location = new System.Drawing.Point(244, 7);
             this.groupListCombo.Name = "groupListCombo";
-            this.groupListCombo.Size = new System.Drawing.Size(125, 25);
-            this.groupListCombo.TabIndex = 0;
             // 
             // groupLabel
             // 
-            this.groupLabel.AutoSize = true;
-            this.groupLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupLabel.Location = new System.Drawing.Point(193, 12);
+            resources.ApplyResources(this.groupLabel, "groupLabel");
             this.groupLabel.Name = "groupLabel";
-            this.groupLabel.Size = new System.Drawing.Size(45, 17);
-            this.groupLabel.TabIndex = 1;
-            this.groupLabel.Text = "Group";
             // 
             // snippetContentBox
             // 
-            this.snippetContentBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.snippetContentBox.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.snippetContentBox.Location = new System.Drawing.Point(12, 36);
-            this.snippetContentBox.Multiline = true;
+            resources.ApplyResources(this.snippetContentBox, "snippetContentBox");
             this.snippetContentBox.Name = "snippetContentBox";
-            this.snippetContentBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.snippetContentBox.Size = new System.Drawing.Size(440, 204);
-            this.snippetContentBox.TabIndex = 2;
             // 
             // addSnippetButton
             // 
-            this.addSnippetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.addSnippetButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.addSnippetButton.Location = new System.Drawing.Point(296, 246);
+            resources.ApplyResources(this.addSnippetButton, "addSnippetButton");
             this.addSnippetButton.Name = "addSnippetButton";
-            this.addSnippetButton.Size = new System.Drawing.Size(75, 23);
-            this.addSnippetButton.TabIndex = 3;
-            this.addSnippetButton.Text = "Save";
             this.addSnippetButton.UseVisualStyleBackColor = true;
             this.addSnippetButton.Click += new System.EventHandler(this.addSnippetButton_Click);
             // 
             // cancelButton
             // 
-            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cancelButton.Location = new System.Drawing.Point(377, 246);
+            resources.ApplyResources(this.cancelButton, "cancelButton");
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 4;
-            this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // nameLabel
             // 
-            this.nameLabel.AutoSize = true;
-            this.nameLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.nameLabel.Location = new System.Drawing.Point(13, 13);
+            resources.ApplyResources(this.nameLabel, "nameLabel");
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(43, 17);
-            this.nameLabel.TabIndex = 5;
-            this.nameLabel.Text = "Name";
             // 
             // nameTextBox
             // 
-            this.nameTextBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.nameTextBox.Location = new System.Drawing.Point(62, 9);
+            resources.ApplyResources(this.nameTextBox, "nameTextBox");
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(125, 23);
-            this.nameTextBox.TabIndex = 6;
             // 
             // AddSnippetForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 281);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.cancelButton);
@@ -128,7 +94,6 @@
             this.Name = "AddSnippetForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "Add Snippet";
             this.Load += new System.EventHandler(this.AddSnippetForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
