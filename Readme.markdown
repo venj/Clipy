@@ -2,7 +2,7 @@
 
 ![Icon](icon.png)
 
-**Clipy 1.1.0起开始加入中文界面。**
+**Clipy 1.1.0开始加入中文界面。**
 
 Clipboard history management app for Windows.
 
