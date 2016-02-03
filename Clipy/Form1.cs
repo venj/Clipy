@@ -592,5 +592,10 @@ namespace Clipy
             // FIXME: replace the messagebox with hud
             MessageBox.Show(resmgr.GetString("__message_box_message_copied", ci));
         }
+
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            SettingsMenu_Click(sender, e);
+        }
     }
 }

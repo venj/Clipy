@@ -117,11 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="renameGroupButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="renameGroupButton.Text" xml:space="preserve">
     <value>重命名</value>
   </data>
+  <data name="deleteGroupButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="deleteGroupButton.Text" xml:space="preserve">
     <value>删除</value>
+  </data>
+  <data name="addGroupButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="notifyIcon1.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -6296,6 +6306,12 @@
         +AAAD+P4/j+P4/j+P4/j+P4//z/P8/z/P8/z/P8/z/P8AADP8/z/P8/z/P8/z/P8/z8=
 </value>
   </data>
+  <data name="settingsButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="settingsButton.Text" xml:space="preserve">
+    <value>设置</value>
+  </data>
   <data name="editSnippetButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -6308,6 +6324,9 @@
         GAfn8LBR4+fSskCNqdBcq9/Dc+DC69lceqIge9Rj6lL6S3EMPnUYY+wLKiSo9xS6KeQAAAAASUVORK5C
         YII=
 </value>
+  </data>
+  <data name="editSnippetButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="editSnippetButton.Text" xml:space="preserve">
     <value>编辑</value>
@@ -6327,8 +6346,14 @@
         jj0m5LWkzEgEAun3GidWpfMXEcIXbQa1Et/k+CgAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="deleteSnippetButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="deleteSnippetButton.Text" xml:space="preserve">
     <value>删除</value>
+  </data>
+  <data name="addSnippetButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="addSnippetButton.Text" xml:space="preserve">
     <value>新建</value>

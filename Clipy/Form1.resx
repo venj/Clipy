@@ -125,9 +125,6 @@
   <data name="horizontalSplitter.SplitterDistance" type="System.Int32, mscorlib">
     <value>194</value>
   </data>
-  <data name="editSnippetButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei UI, 9pt</value>
-  </data>
   <data name="deleteGroupButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>73, 274</value>
   </data>
@@ -139,6 +136,9 @@
   </data>
   <data name="&gt;&gt;groupsList.Parent" xml:space="preserve">
     <value>horizontalSplitter.Panel1</value>
+  </data>
+  <data name="addSnippetButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="groupsList.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft YaHei UI, 9pt</value>
@@ -152,11 +152,17 @@
   <data name="renameGroupButton.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
+  <data name="settingsButton.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="&gt;&gt;verticalSplitter.Panel1.Name" xml:space="preserve">
     <value>verticalSplitter.Panel1</value>
   </data>
   <data name="groupsList.ItemHeight" type="System.Int32, mscorlib">
     <value>17</value>
+  </data>
+  <data name="addGroupButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>167, 2</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="renameGroupButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -168,11 +174,11 @@
   <data name="&gt;&gt;renameGroupButton.Parent" xml:space="preserve">
     <value>horizontalSplitter.Panel1</value>
   </data>
-  <data name="&gt;&gt;verticalSplitter.Name" xml:space="preserve">
-    <value>verticalSplitter</value>
+  <data name="deleteSnippetButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
   </data>
-  <data name="addGroupButton.Text" xml:space="preserve">
-    <value>+</value>
+  <data name="&gt;&gt;groupNameTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="verticalSplitter.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -181,7 +187,7 @@
     <value>6</value>
   </data>
   <data name="deleteSnippetButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 60</value>
+    <value>75, 60</value>
   </data>
   <data name="&gt;&gt;addGroupButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -234,6 +240,9 @@
   <data name="deleteGroupButton.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
+  <data name="settingsButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 12</value>
+  </data>
   <data name="editSnippetButton.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -241,19 +250,22 @@
     <value>0</value>
   </data>
   <data name="addSnippetButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 60</value>
+    <value>75, 60</value>
   </data>
-  <data name="groupNameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="&gt;&gt;deleteSnippetButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="editSnippetButton.Text" xml:space="preserve">
     <value>Edit</value>
   </data>
   <data name="&gt;&gt;editSnippetButton.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
-  <data name="addGroupButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 2</value>
+  <data name="settingsButton.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="settingsButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 60</value>
   </data>
   <data name="contentTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -274,7 +286,7 @@
     <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="&gt;&gt;addSnippetButton.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="deleteGroupButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -282,14 +294,17 @@
   <data name="verticalSplitter.SplitterDistance" type="System.Int32, mscorlib">
     <value>106</value>
   </data>
+  <data name="&gt;&gt;settingsButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="&gt;&gt;horizontalSplitter.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="groupsList.Size" type="System.Drawing.Size, System.Drawing">
     <value>187, 242</value>
   </data>
-  <data name="&gt;&gt;verticalSplitter.Parent" xml:space="preserve">
-    <value>horizontalSplitter.Panel2</value>
+  <data name="&gt;&gt;settingsButton.Name" xml:space="preserve">
+    <value>settingsButton</value>
   </data>
   <data name="&gt;&gt;renameGroupButton.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -307,7 +322,7 @@
     <value>$this</value>
   </data>
   <data name="deleteSnippetButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 12</value>
+    <value>179, 12</value>
   </data>
   <data name="&gt;&gt;groupsList.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -6532,8 +6547,8 @@
   <data name="contentTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>386, 185</value>
   </data>
-  <data name="&gt;&gt;deleteSnippetButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="settingsButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
   </data>
   <data name="&gt;&gt;renameGroupButton.Name" xml:space="preserve">
     <value>renameGroupButton</value>
@@ -6562,6 +6577,9 @@
   <data name="&gt;&gt;snippetsList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;settingsButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;deleteSnippetButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -6574,8 +6592,14 @@
   <data name="&gt;&gt;editSnippetButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="addGroupButton.Text" xml:space="preserve">
+    <value>+</value>
+  </data>
   <data name="renameGroupButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 274</value>
+  </data>
+  <data name="settingsButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="&gt;&gt;verticalSplitter.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -6593,19 +6617,22 @@
     <value>verticalSplitter.Panel1</value>
   </data>
   <data name="&gt;&gt;deleteSnippetButton.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;verticalSplitter.Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="editSnippetButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 12</value>
+    <value>98, 12</value>
   </data>
   <data name="verticalSplitter.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="&gt;&gt;groupNameTextBox.Parent" xml:space="preserve">
     <value>horizontalSplitter.Panel1</value>
+  </data>
+  <data name="settingsButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>BottomCenter</value>
   </data>
   <data name="&gt;&gt;verticalSplitter.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -6634,14 +6661,14 @@
   <data name="&gt;&gt;addSnippetButton.Name" xml:space="preserve">
     <value>addSnippetButton</value>
   </data>
-  <data name="&gt;&gt;groupNameTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="verticalSplitter.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
   </data>
   <data name="notifyIcon1.Visible" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="groupNameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="addGroupButton.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -6664,20 +6691,20 @@
   <data name="editSnippetButton.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomCenter</value>
   </data>
-  <data name="deleteSnippetButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 12</value>
   </data>
   <data name="editSnippetButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 60</value>
+    <value>75, 60</value>
   </data>
   <data name="deleteSnippetButton.Text" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="addSnippetButton.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft YaHei UI, 9pt</value>
+  <data name="&gt;&gt;verticalSplitter.Parent" xml:space="preserve">
+    <value>horizontalSplitter.Panel2</value>
+  </data>
+  <data name="&gt;&gt;settingsButton.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;addGroupButton.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -6694,8 +6721,8 @@
   <data name="&gt;&gt;verticalSplitter.Panel1.Parent" xml:space="preserve">
     <value>verticalSplitter</value>
   </data>
-  <data name="snippetsList.ItemHeight" type="System.Int32, mscorlib">
-    <value>17</value>
+  <data name="editSnippetButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft YaHei UI, 9pt</value>
   </data>
   <data name="deleteSnippetButton.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -6705,6 +6732,9 @@
   </data>
   <data name="editSnippetButton.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
+  </data>
+  <data name="snippetsList.ItemHeight" type="System.Int32, mscorlib">
+    <value>17</value>
   </data>
   <data name="snippetsList.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -6728,13 +6758,16 @@
     <value>verticalSplitter</value>
   </data>
   <data name="&gt;&gt;horizontalSplitter.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="addSnippetButton.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="&gt;&gt;snippetsList.Name" xml:space="preserve">
     <value>snippetsList</value>
+  </data>
+  <data name="&gt;&gt;verticalSplitter.Name" xml:space="preserve">
+    <value>verticalSplitter</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>
@@ -6776,9 +6809,6 @@
   <data name="groupsList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>zh</value>
-  </metadata>
   <metadata name="notifyIcon1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

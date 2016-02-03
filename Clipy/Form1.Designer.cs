@@ -41,6 +41,7 @@
             this.snippetsList = new System.Windows.Forms.ListBox();
             this.contentTextBox = new System.Windows.Forms.TextBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.settingsButton = new System.Windows.Forms.Button();
             this.editSnippetButton = new System.Windows.Forms.Button();
             this.deleteSnippetButton = new System.Windows.Forms.Button();
             this.addSnippetButton = new System.Windows.Forms.Button();
@@ -141,6 +142,14 @@
             resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
+            // settingsButton
+            // 
+            resources.ApplyResources(this.settingsButton, "settingsButton");
+            this.settingsButton.Image = global::Clipy.Properties.Resources.settings_small;
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            // 
             // editSnippetButton
             // 
             resources.ApplyResources(this.editSnippetButton, "editSnippetButton");
@@ -167,6 +176,7 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.editSnippetButton);
             this.Controls.Add(this.deleteSnippetButton);
             this.Controls.Add(this.addSnippetButton);
@@ -203,6 +213,7 @@
         private System.Windows.Forms.Button addSnippetButton;
         private System.Windows.Forms.Button deleteSnippetButton;
         private System.Windows.Forms.Button editSnippetButton;
+        private System.Windows.Forms.Button settingsButton;
     }
 }
 
