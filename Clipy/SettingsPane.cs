@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
@@ -113,7 +114,9 @@ namespace Clipy
 
         private void changeCodeFontButton_Click(object sender, EventArgs e)
         {
+
             var dialog = new FontDialog();
+            dialog.Font = fetchMonoFont();
             dialog.AllowVerticalFonts = false;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -122,6 +125,15 @@ namespace Clipy
                 CurrentSettings["monoFontSize"] = dialog.Font.Size;
                 fontNameTextBox.Text = dialog.Font.Name + " " + dialog.Font.Size + "pt " + dialog.Font.Style.ToString();
             }
+        }
+
+        private Font fetchMonoFont()
+        {
+            string fontName = Properties.Settings.Default.monoFontName;
+            float fontSize = Properties.Settings.Default.monoFontSize;
+            FontStyle fontStyle = (FontStyle)Enum.Parse(typeof(FontStyle), Properties.Settings.Default.monoFontStyle);
+            var UIFont = new Font(fontName, fontSize, fontStyle);
+            return UIFont;
         }
 
         private void updateCurrentSettings()
