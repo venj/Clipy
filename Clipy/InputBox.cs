@@ -15,9 +15,17 @@ namespace Clipy
         private string Prompt { get; set; }
         private string Title { get; set; }
         private string DefaultResponse { get; set; }
-
-        public InputBox(string prompt, string title, string defaultResponse) : this()
+        public string InputResult
         {
+            get
+            {
+                return contentBox.Text;
+            }
+        }
+
+        public InputBox(string prompt, string title, string defaultResponse)
+        {
+            InitializeComponent();
             Prompt = prompt;
             Title = title;
             DefaultResponse = defaultResponse;
@@ -28,11 +36,12 @@ namespace Clipy
             contentBox.SelectAll();
         }
 
+        /*
         public InputBox()
         {
             InitializeComponent();
         }
-
+        */
         private void InputBox_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)

@@ -321,14 +321,20 @@ namespace Clipy
         {
             var index = groupsList.SelectedIndex;
             var group = groups[index];
-            string input = Microsoft.VisualBasic.Interaction.InputBox(resmgr.GetString("__message_box_message_Remane_group", ci), resmgr.GetString("__message_box_title_Remane", ci), group.Name).Trim();
-            if (input != "")
+            var inputBox = new InputBox(resmgr.GetString("__message_box_message_Remane_group", ci), resmgr.GetString("__message_box_title_Remane", ci), group.Name);
+            if (inputBox.ShowDialog() == DialogResult.OK)
             {
-                var db = new DataProcess();
-                db.RenameGroup(group, input);
-                ReloadGroupsUI();
+                string input = inputBox.InputResult
+                if (input != "")
+                {
+                    var db = new DataProcess();
+                    db.RenameGroup(group, input);
+                    ReloadGroupsUI();
+                }
+                groupsList.SelectedIndex = index;
             }
-            groupsList.SelectedIndex = index;
+
+            
         }
 
         private void historiesList_DoubleClick(object sender, EventArgs e)
