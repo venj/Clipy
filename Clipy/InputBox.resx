@@ -122,11 +122,14 @@
     <value>True</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="promptLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft YaHei UI, 9pt</value>
+  </data>
   <data name="promptLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 13</value>
   </data>
   <data name="promptLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 12</value>
+    <value>0, 17</value>
   </data>
   <data name="promptLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -157,7 +160,7 @@
     <value>75, 23</value>
   </data>
   <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="cancelButton.Text" xml:space="preserve">
     <value>Cancel</value>
@@ -207,14 +210,17 @@
   <data name="contentBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
+  <data name="contentBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft YaHei UI, 9pt</value>
+  </data>
   <data name="contentBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 50</value>
   </data>
   <data name="contentBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 21</value>
+    <value>399, 23</value>
   </data>
   <data name="contentBox.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;contentBox.Name" xml:space="preserve">
     <value>contentBox</value>

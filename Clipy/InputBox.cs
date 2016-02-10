@@ -23,9 +23,8 @@ namespace Clipy
             }
         }
 
-        public InputBox(string prompt, string title, string defaultResponse)
+        public InputBox(string prompt, string title, string defaultResponse) : this()
         {
-            InitializeComponent();
             Prompt = prompt;
             Title = title;
             DefaultResponse = defaultResponse;
@@ -33,21 +32,24 @@ namespace Clipy
             Text = title;
             promptLabel.Text = Prompt;
             contentBox.Text = defaultResponse;
-            contentBox.SelectAll();
         }
 
-        /*
         public InputBox()
         {
             InitializeComponent();
         }
-        */
+        
         private void InputBox_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 DialogResult = DialogResult.Cancel;
             }
+        }
+
+        private void InputBox_Load(object sender, EventArgs e)
+        {
+            contentBox.SelectAll();
         }
     }
 }

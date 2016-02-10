@@ -324,12 +324,13 @@ namespace Clipy
             var inputBox = new InputBox(resmgr.GetString("__message_box_message_Remane_group", ci), resmgr.GetString("__message_box_title_Remane", ci), group.Name);
             if (inputBox.ShowDialog() == DialogResult.OK)
             {
-                string input = inputBox.InputResult
+                string input = inputBox.InputResult;
                 if (input != "")
                 {
                     var db = new DataProcess();
                     db.RenameGroup(group, input);
                     ReloadGroupsUI();
+                    UpdateTrayMenu();
                 }
                 groupsList.SelectedIndex = index;
             }
