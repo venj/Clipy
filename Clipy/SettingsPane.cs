@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
@@ -29,7 +30,7 @@ namespace Clipy
                     defaultSettings.Add("numberOfHistories", new decimal(50));
                     defaultSettings.Add("menuLength", new decimal(20));
                     defaultSettings.Add("itemsPerGroup", new decimal(10));
-                    defaultSettings.Add("startAtLogin", false);
+                    defaultSettings.Add("startAtLogin", true);
                 }
                 return defaultSettings;
             }
@@ -43,13 +44,13 @@ namespace Clipy
                 if (currentSettings == null)
                 {
                     currentSettings = new Dictionary<string, Object>();
-                    currentSettings.Add("monoFontName", "Consolas");
-                    currentSettings.Add("monoFontSize", 9.5F);
-                    currentSettings.Add("monoFontStyle", "Regular");
-                    currentSettings.Add("numberOfHistories", new decimal(50));
-                    currentSettings.Add("menuLength", new decimal(20));
-                    currentSettings.Add("itemsPerGroup", new decimal(10));
-                    currentSettings.Add("startAtLogin", false);
+                    currentSettings.Add("monoFontName", Properties.Settings.Default.monoFontName);
+                    currentSettings.Add("monoFontSize", Properties.Settings.Default.monoFontSize);
+                    currentSettings.Add("monoFontStyle", Properties.Settings.Default.monoFontStyle);
+                    currentSettings.Add("numberOfHistories", Properties.Settings.Default.numberOfHistories);
+                    currentSettings.Add("menuLength", Properties.Settings.Default.menuLength);
+                    currentSettings.Add("itemsPerGroup", Properties.Settings.Default.itemsPerGroup);
+                    currentSettings.Add("startAtLogin", Properties.Settings.Default.startAtLogin);
                 }
                 return currentSettings;
             }
@@ -63,20 +64,12 @@ namespace Clipy
         
         public void loadCurrentSettingsToUI()
         {
-            // Load current settings.
-            CurrentSettings["monoFontName"] = Properties.Settings.Default.monoFontName;
-            CurrentSettings["monoFontSize"] = Properties.Settings.Default.monoFontSize;
-            CurrentSettings["monoFontStyle"] = Properties.Settings.Default.monoFontStyle;
-            CurrentSettings["numberOfHistories"] = Properties.Settings.Default.numberOfHistories;
-            CurrentSettings["menuLength"] = Properties.Settings.Default.menuLength;
-            CurrentSettings["itemsPerGroup"] = Properties.Settings.Default.itemsPerGroup;
-            CurrentSettings["startAtLogin"] = Properties.Settings.Default.startAtLogin;
             // fill UI
-            fontNameTextBox.Text = Properties.Settings.Default.monoFontName + " " + Properties.Settings.Default.monoFontSize + "pt " + Properties.Settings.Default.monoFontStyle;
-            numberOfHistoriesStepper.Value = Properties.Settings.Default.numberOfHistories;
-            menuLengthStepper.Value = Properties.Settings.Default.menuLength;
-            itemPerGroupStepper.Value = Properties.Settings.Default.itemsPerGroup;
-            startupAtLoginCheckBox.Checked = Properties.Settings.Default.startAtLogin;
+            fontNameTextBox.Text = CurrentSettings["monoFontName"] + " " + CurrentSettings["monoFontSize"] + "pt " + CurrentSettings["monoFontStyle"];
+            numberOfHistoriesStepper.Value = Convert.ToDecimal(CurrentSettings["numberOfHistories"]);
+            menuLengthStepper.Value = Convert.ToDecimal(CurrentSettings["menuLength"]);
+            itemPerGroupStepper.Value = Convert.ToDecimal(CurrentSettings["itemsPerGroup"]);
+            startupAtLoginCheckBox.Checked = Convert.ToBoolean(CurrentSettings["startAtLogin"]);
         }
 
         private bool resetToDefaultSettings()
@@ -92,14 +85,13 @@ namespace Clipy
 
         private bool SaveSettings(Dictionary<string, Object> dict)
         {
-
-            Properties.Settings.Default.monoFontName = (string)dict["monoFontName"];
-            Properties.Settings.Default.monoFontSize = (float)dict["monoFontSize"];
-            Properties.Settings.Default.monoFontStyle = (string)dict["monoFontStyle"];
-            Properties.Settings.Default.numberOfHistories = decimal.ToInt32((decimal)dict["numberOfHistories"]);
-            Properties.Settings.Default.menuLength = decimal.ToInt32((decimal)dict["menuLength"]);
-            Properties.Settings.Default.itemsPerGroup = decimal.ToInt32((decimal)dict["itemsPerGroup"]);
-            Properties.Settings.Default.startAtLogin = (bool)dict["startAtLogin"];
+            Properties.Settings.Default.monoFontName = Convert.ToString(dict["monoFontName"]);
+            Properties.Settings.Default.monoFontSize = Convert.ToSingle(dict["monoFontSize"]);
+            Properties.Settings.Default.monoFontStyle = Convert.ToString(dict["monoFontStyle"]);
+            Properties.Settings.Default.numberOfHistories = Convert.ToInt32(dict["numberOfHistories"]);
+            Properties.Settings.Default.menuLength = Convert.ToInt32(dict["menuLength"]);
+            Properties.Settings.Default.itemsPerGroup = Convert.ToInt32(dict["itemsPerGroup"]);
+            Properties.Settings.Default.startAtLogin = Convert.ToBoolean(dict["startAtLogin"]);
             try
             {
                 Properties.Settings.Default.Save();
@@ -142,6 +134,21 @@ namespace Clipy
             CurrentSettings["menuLength"] = menuLengthStepper.Value;
             CurrentSettings["itemsPerGroup"] = itemPerGroupStepper.Value;
             CurrentSettings["startAtLogin"] = startupAtLoginCheckBox.Checked;
+            // Update start up status
+            updateStartupItem(startupAtLoginCheckBox.Checked);
+        }
+
+        private void updateStartupItem(bool startup)
+        {
+            RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            if (startup)
+            {
+                rkApp.SetValue("Clipy", Application.ExecutablePath);
+            }
+            else
+            {
+                rkApp.DeleteValue("Clipy", false);
+            }
         }
         
         private void resetButton_Click(object sender, EventArgs e)
