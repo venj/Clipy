@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -43,6 +44,16 @@ namespace Clipy
                             break;
                         }
                     }
+                }
+                
+                RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                if (Properties.Settings.Default.startAtLogin)
+                {
+                    rkApp.SetValue("Clipy", Application.ExecutablePath);
+                }
+                else
+                {
+                    rkApp.DeleteValue("Clipy", false);
                 }
             }
         }
