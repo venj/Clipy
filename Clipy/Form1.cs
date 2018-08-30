@@ -217,7 +217,7 @@ namespace Clipy
         void ClipboardDataChanged()
         {
             IDataObject iData = Clipboard.GetDataObject();
-            if (iData == null) { MessageBox.Show("Null!"); }
+            if (iData == null) { Console.WriteLine("Empty content."); }
             try
             {
                 if (iData.GetDataPresent(DataFormats.Text))
@@ -234,8 +234,7 @@ namespace Clipy
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString());
-                //throw;
+                Console.WriteLine(e.ToString());
             }
         }
 
