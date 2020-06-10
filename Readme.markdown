@@ -14,13 +14,13 @@ Main features are basically usable. Settings pane and keyboard shortcuts are not
 
 ### Using binary release:
 
-1. Download "[Clipy_1.2.0-release.zip](https://github.com/venj/Clipy/releases/download/1.2.0/Clipy_1.2.0-release.zip)" from [releases](https://github.com/venj/Clipy/releases) page. Unzip and install the app.
+1. Download "[Clipy 1.3](https://github.com/venj/Clipy/releases/download/1.3/Clipy.zip)" from [releases](https://github.com/venj/Clipy/releases) page. Unzip and install the app.
 
 2. Enjoy and file bugs.
 
 ### From source code:
 
-Clone this project and build with Visual Studio Community 2015. 
+Clone this project and build with Visual Studio Community 2019. 
 
 ## Demo
 
